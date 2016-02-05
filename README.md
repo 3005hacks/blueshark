@@ -1,1 +1,2 @@
-# blueshark
+# BlueShark
+## It's lit fam!
