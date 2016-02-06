@@ -1,8 +1,30 @@
 Events = new Mongo.Collection("events");
+var isFBinit = false;
+
+currentUserData = {
+  name: null,
+  userID: null,
+  userAccessToken: null,
+  loginStatus: false,
+  proPicURL: null
+}
 
 if (Meteor.isClient) {
+  console.log("bruh");
+  window.fbAsyncInit = function() {
+    console.log("fb initializing...");
+    FB.init({
+      appId : '478980925626054',
+      status : true,
+      xfbml : true,
+      version : 'v2.4'
+    });
+    isFBinit = true;
+    console.log("fb initialized");
 
-  Template.hello.helpers({
+  };
+
+  Template.login.helpers({
   });
 
   Template.hello.events({
@@ -28,6 +50,16 @@ if (Meteor.isClient) {
       // event.target.fb-event-link.value = "";
       // event.target.recommended-price.value = "";
       // event.target.cash-name.value = "";
+
+  Template.login.events({
+    'click .login-button': function (e) {
+      e.preventDefault();
+      Meteor.call('fbLogin');
+    },
+
+    'click .logout-button': function (e) {
+      e.preventDefault();
+      Meteor.call('fbLogout');
     }
   });
 
@@ -75,3 +107,26 @@ if (Meteor.isServer) {
 
   });
 }
+
+Meteor.methods({
+  // fbLogin: function() {
+  //   console.log('test');
+  // }
+
+  fbLogin: function() {
+    if (isFBinit){
+      FB.login();
+    }
+  },
+
+  fbLogout: function() {
+    if (isFBinit){
+
+      FB.logout();
+      currentUserData.loginStatus = false;
+      currentUserDep.changed();
+      console.log('logged out');
+    }
+  }
+
+});

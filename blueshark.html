@@ -4,7 +4,20 @@
 
 <body>
   <h1>It&rsquo;s Potluck Time!</h1>
+
+  {{ > login }}
+
 </body>
+
+<template name="login">
+  {{ #if isUserLoggedIn }}
+    Welcome {{ currentUserName }}
+    <img class="user-pro-pic" src="{{ currentUserProPic }}">
+    <button class="logout-button">Logout</button>
+  {{ else }}
+    <button class="login-button">Login with Facebook</button>
+  {{ /if }}
+</template>
 
 <template name="hello">
   <form class="new-event">
