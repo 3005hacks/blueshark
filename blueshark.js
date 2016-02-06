@@ -9,8 +9,9 @@ currentUserData = {
   proPicURL: null
 }
 
+var currentUserDep = new Tracker.Dependency();
+
 if (Meteor.isClient) {
-  console.log("bruh");
   window.fbAsyncInit = function() {
     console.log("fb initializing...");
     FB.init({
@@ -19,12 +20,46 @@ if (Meteor.isClient) {
       xfbml : true,
       version : 'v2.4'
     });
+
     isFBinit = true;
     console.log("fb initialized");
 
+    // triggered on fbLogin and fbLogout
+    FB.Event.subscribe('auth.authResponseChange', function(response) {
+      if (response.status === 'connected') {
+        currentUserData.userID = response.authResponse.userID;
+        currentUserData.userAccessToken = response.authResponse.accessToken;
+
+        FB.api('/{name}',
+            function (response) {
+              if (response && !response.error) {
+
+                currentUserData.proPicURL = "https://graph.facebook.com/" + currentUserData.userID + "/picture";
+                currentUserData.name = JSON.parse(response[0].body).name;
+                
+                currentUserDep.changed();
+              }
+            }
+        );
+
+        currentUserData.loginStatus = true;
+        currentUserDep.changed();
+
+      }
+    });
   };
 
   Template.login.helpers({
+    currentUserName: function() {
+      currentUserDep.depend();
+      return currentUserData.name;
+    },
+
+    // returns src for user profile picture to <img>
+    currentUserProPic: function() {
+      currentUserDep.depend();
+      return currentUserData.proPicURL;
+    }
   });
 
   Template.hello.events({
