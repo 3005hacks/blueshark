@@ -244,7 +244,7 @@ Meteor.methods({
           }
         }
       );
-  }
+  },
 
   makeEvent: function() {
 
