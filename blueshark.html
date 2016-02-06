@@ -13,7 +13,10 @@
     {{ > makeEvent }}
   {{/if}}
 
-  {{> event}}
+  {{#if findEventShow}}
+    {{ > findEvent }}
+  {{/if}}
+
 </body>
 
 <template name="login">
@@ -34,18 +37,19 @@
 </template>
 
 <template name="makeEvent">
-  <input type="text" name="link" placeholder="Enter Facebook event link" />
+  <input type="text" name="link1" placeholder="Enter Facebook event link" />
   <input type="text" name="price" placeholder="Price per person" />
   <input type="text" name="cashtag" placeholder="$cashtag" />
   <input type="button" value="Submit" class="new-event" />
+</template>
+
+<template name="findEvent">
+  <input type="text" name="link2" placeholder="Enter Facebook event link" />
+  <input type="button" value="Submit" class="find-event" />
 </template>
 
 <template name="hello">
   <button>Click Me</button>
   <p>You've pressed the button {{counter}} times.</p>
   <h2>Create Event</h2>
-</template>
-
-<template name="event">
-  <h1>Dis an event</h1>
 </template>
