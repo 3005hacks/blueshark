@@ -3,15 +3,16 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> event}}
+  <h1>It&rsquo;s Potluck Time!</h1>
 </body>
 
 <template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-  <h2>Create Event</h2>
+  <form class="new-event">
+    <input type="text" name="link" placeholder="Enter Facebook event link" />
+    <input type="text" name="price" placeholder="Price per person" />
+    <input type="text" name="cashtag" placeholder="$cashtag" />
+    <input type="submit" value="Submit" />
+  </form>
 </template>
 
 <template name="event">
