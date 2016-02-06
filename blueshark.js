@@ -21,7 +21,7 @@ if (Meteor.isClient) {
     });
 
     isFBinit = true;
-    console.log("fb initialized");
+    console.log("fb  initialized");
 
     // triggered on fbLogin and fbLogout
     FB.Event.subscribe('auth.authResponseChange', function(response) {
