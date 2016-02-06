@@ -79,6 +79,12 @@ body {
   margin: 4rem;
   padding: 0;
 }
+.header {
+  line-height: 2rem;
+}
+.login {
+  text-align: right;
+}
 .buttons {
   /*background-color: #fb8171;*/
   color: white;

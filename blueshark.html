@@ -3,13 +3,37 @@
 </head>
 
 <body>
-  <h1>Time 2 Potluck =)</h1>
+  <div class="clearfix header">
+    <div class="col col-6"><h1>Time 2 Potluck =)</h1></div>
+    <div class="col col-6 login">{{ > login }}</div>
+  </div>
+
+  <!-- {{#if makeEventShow}}
+    {{ > makeEvent }}
+  {{/if}}
+
+  {{#if findEventShow}}
+    {{ > findEvent }}
+  {{/if}} -->
+  
+</body>
+
+<template name="home">
+  {{ #if isUserLoggedIn }}
+  <div class="clearfix buttons">
+    <div class="make-event col col-6 child ">Make a Potluck Event</div>
+    <div class="find-event col col-6 child">Find a Potluck Event</div>
+  </div>
+  {{ /if }}
+
   {{#if makeEventShow}}
     {{ > makeEvent }}
   {{/if}}
 
-  {{> event}}
-</body>
+  {{#if findEventShow}}
+    {{ > findEvent }}
+  {{/if}}
+</template>
 
 <template name="login">
   {{ #if isUserLoggedIn }}
@@ -18,17 +42,7 @@
     <button class="logout-button">Logout</button>
   {{ else }}
     <!-- <button class="login-button">Login with Facebook</button> -->
-    <div class="fb-login-button login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
-  {{ /if }}
-</template>
-
-<template name="home">
-  {{ > login }}
-  {{ #if isUserLoggedIn }}
-  <div class="clearfix buttons">
-    <div class="make-event col col-6 child ">Make a Potluck Event</div>
-    <div class="find-event col col-6 child">Find a Potluck Event</div>
-  </div>
+    <div class="fb-login-button login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
   {{ /if }}
 </template>
 
@@ -43,6 +57,12 @@
   </div>
 </template>
 
-<template name="event">
-  <h1>Dis an event</h1>
+<template name="findEvent">
+  <div class="clearfix form">
+    <div class="col col-6"><p></p></div>
+    <div class="col col-6">
+      <input type="text" name="link2" placeholder="Enter Facebook event link" />
+      <input type="button" value="Submit" class="find-event submit-button" />
+    </div>
+  </div>
 </template>

@@ -78,14 +78,12 @@ if (Meteor.isClient) {
   });
 
   Template.makeEvent.events({
-    'click .new-event': function() {
+    'click .new-event': function(e) {
       // Prevent default browser form submit
-      event.preventDefault();
-
-      console.log(1231231);
+      e.preventDefault();
  
       // Get value from form element
-      var eventUrl = $('input[name="link"]').val();
+      var eventUrl = $('input[name="link1"]').val();
       var price = $('input[name="price"]').val();
       var cashName = $('input[name="cashtag"]').val();
 
@@ -104,9 +102,26 @@ if (Meteor.isClient) {
       Meteor.call('getFbEvent', eventId, thisId);
  
       // Clear form
-      // event.target.fb-event-link.value = "";
-      // event.target.recommended-price.value = "";
-      // event.target.cash-name.value = "";
+      $('input[name="link1"]').val('');
+      $('input[name="price"]').val('');
+      $('input[name="cashtag"]').val('');
+    }
+  });
+
+  Template.findEvent.events({
+    'click .find-event': function(e) {
+      // Prevent default browser form submit
+      e.preventDefault();
+
+      // Get value from form element
+      var eventUrl = $('input[name="link2"]').val();
+
+      var thisId = Events.findOne({
+        eventUrl: eventUrl
+      });
+
+      console.log(thisId);
+
     }
   });
 
@@ -128,12 +143,14 @@ if (Meteor.isClient) {
   Template.home.helpers({
     showCreateDiv: function() {
       return Session.get('showCreate');
-    }
-  });
-
-  Template.body.helpers({
+    },
+    
     makeEventShow: function(){
       return Session.get('makeEvent');
+    },
+
+    findEventShow: function(){
+      return Session.get('findEvent');
     }
   });
 
@@ -153,12 +170,6 @@ if (Meteor.isClient) {
         return Events.findOne({_id: this.params._id});
       }
     });
-  });
-
-  Template.event.helpers({
-    payView: function(x){
-      return x;
-    }
   });
   
 }
