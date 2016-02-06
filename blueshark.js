@@ -1,8 +1,5 @@
 var isFBinit = false;
 
-var makeEventVal = false;
-var createEventVal = false;
-
 currentUserData = {
   name: null,
   userID: null,
@@ -12,9 +9,6 @@ currentUserData = {
 }
 
 var currentUserDep = new Tracker.Dependency();
-
-var makeEventDep = new Tracker.Dependency();
-var makeEventVal = null;
 
 if (Meteor.isClient) {
   window.fbAsyncInit = function() {
@@ -54,6 +48,9 @@ if (Meteor.isClient) {
     });
   };
 
+  Session.setDefault('makeEvent', false);
+  Session.setDefault('findEvent', false);
+
   Template.login.helpers({
     currentUserName: function() {
       currentUserDep.depend();
@@ -81,19 +78,18 @@ if (Meteor.isClient) {
 
   Template.landingPage.events({
     'click .make-event':function(){
-      makeEventVal = true;
-      makeEventDep.changed();
+      Session.set('findEvent', false);
+      Session.set('makeEvent', true);
     },
     'click .find-event':function(){
-      makeEventVal = false;
-      makeEventDep.changed();
+      Session.set('findEvent', true);
+      Session.set('makeEvent', false);
     }
   });
 
   Template.body.helpers({
     makeEventShow: function(){
-      makeEventDep.depend();
-      return makeEventVal;
+      return Session.get('makeEvent');
     }
   });
 
@@ -140,14 +136,6 @@ Meteor.methods({
       currentUserDep.changed();
       console.log('logged out');
     }
-  },
-
-  makeEvent: function() {
-
-  },
-
-  findEvent: function() {
-
-  },
+  }
 
 });
