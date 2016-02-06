@@ -5,6 +5,7 @@
 	background-color: white;
 	height: 100vh;
 	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 	color: white;
 	font-family: 'Josefin Sans', sans-serif;
 	font-size: 10px;
@@ -13,11 +14,14 @@
 		height: 20vh;
 		width: 100%;
 		background-color: #CC2936;
+		font-family: 'Quicksand', sans-serif;
+		font-size: 5rem;
+		line-height: 10rem;
+		text-align: center;
 	}
 	#pay-or-bring{
 		width: 100%;
 		overflow: hidden;
-		
 	}
 		#pay{
 			background-color: #F4AC45;
@@ -39,12 +43,6 @@
 		margin: 3% 27.5% 5% 27.5%;
 
 	}	
-
-	#item-feed-bring{
-		width: 45%;
-		margin: 3% 27.5% 5% 27.5%;
-
-	}
 
 		#surprise-button{
 			background-color: #CC2936;
@@ -68,4 +66,31 @@
 			border-radius: 2rem;
 			background-color: #CC2936;
 			margin: 3% 0 3% 0;
+			padding: 5% 5% 5% 5%;
 		}
+			.card-title{
+				font-size: 3.5rem;
+			}
+			.card-button{
+				float: left;
+				margin: 5% 10% 5% 10%;
+				font-size: 1.2rem;
+				line-height: 2.7;
+				text-align: center;
+				max-height: 3.5rem;
+				width: 30%;
+				background-color: #F4AC45;
+				border-radius: 2rem;
+				overflow: hidden;
+			}
+
+	#item-feed-bring{
+		width: 45%;
+		margin: 3% 27.5% 5% 27.5%;
+
+	}
+		#suggested-amount-button{
+
+		}
+
+

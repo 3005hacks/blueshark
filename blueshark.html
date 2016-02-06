@@ -2,6 +2,7 @@
   <title>blueshark</title>
 
   <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
 <template name="event">
   <div id = "event-frame">
   	<div id = "event-info-tease">
-
+  	B17 BINCH!!
   	</div>
 
   	<div id = "pay-or-bring">
@@ -36,6 +37,7 @@
   </div>
 </template>
 
+<!-- TEMPLATES FOR THE EVENT TEMPLATE -->
 <template name = "pay"><div id = "pay" class="pay-bring-button">PAY $$$</div></template>
 <template name = "bring"><div id = "bring" class="pay-bring-button">BRING IT</div></template>
 
@@ -60,15 +62,15 @@
 
 <template name="wishListItem">
 	<div id = "wish-list-item" class="item-card">
-		<div id="item-title"></div>
-		<div id="suggested-amount-button">suggested: </div>
-		<div id="custom-amount-button"></div>
+		<div id="item-title" class="card-title">test</div>
+		<div id="suggested-amount-button" class = "card-button">suggested: $4</div>
+		<div id="custom-amount-button" class = "card-button">custom $</div>
 	</div>
 </template>
 
 <template name="wishListBringItem">
 	<div id="wish-list-bring-item" class = "item-card">
-		<div id="bring-item-title"></div>
+		<div id="bring-item-title" class="card-title">Test</div>
 		<div id="contributors">
 			
 		</div>
@@ -78,3 +80,4 @@
 <template name="surpriseButton">
 	<div id = "surprise-button">Surprise Me!</div>
 </template>
+<!-- ###### -->
