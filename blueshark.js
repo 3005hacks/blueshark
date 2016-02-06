@@ -77,16 +77,17 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.home.events({
-    "submit .new-event": function (event) {
+  Template.makeEvent.events({
+    'click .new-event': function() {
       // Prevent default browser form submit
       event.preventDefault();
+
+      console.log(1231231);
  
       // Get value from form element
-      var eventUrl = event.target.link.value;
-      var price = event.target.price.value;
-      var cashName = event.target.cashtag.value;
-
+      var eventUrl = $('input[name="link"]').val();
+      var price = $('input[name="price"]').val();
+      var cashName = $('input[name="cashtag"]').val();
 
       var thisId = Events.insert({
         eventUrl: eventUrl,
@@ -95,44 +96,38 @@ if (Meteor.isClient) {
         title: null,
         description: null,
         time: null,
-      })
+      });
 
       var urlSplit = eventUrl.split("/");
       var eventId = urlSplit[4];
 
-
-
       Meteor.call('getFbEvent', eventId, thisId);
-      Meteor.call('removeAllPosts');
  
       // Clear form
       // event.target.fb-event-link.value = "";
       // event.target.recommended-price.value = "";
       // event.target.cash-name.value = "";
+    }
+  });
+
+  Template.home.events({
+
+    'click .make-event': function() {
+      Session.set('showCreate',true);
+      Session.set('findEvent', false);
+      Session.set('makeEvent', true);
     },
 
-    'click #create':function(){
-      Session.set('showCreate',true);
-    },
-    'click #join':function(){
+    'click .find-event': function() {
       Session.set('showCreate',false);
+      Session.set('findEvent', true);
+      Session.set('makeEvent', false);
     }
   });
 
   Template.home.helpers({
     showCreateDiv: function() {
       return Session.get('showCreate');
-    }
-  });
-
-  Template.landingPage.events({
-    'click .make-event':function(){
-      Session.set('findEvent', false);
-      Session.set('makeEvent', true);
-    },
-    'click .find-event':function(){
-      Session.set('findEvent', true);
-      Session.set('makeEvent', false);
     }
   });
 
@@ -160,29 +155,8 @@ if (Meteor.isClient) {
     });
   });
 
-  //Wish List Item Helper Functions
-  Template.wishListItem.helpers({
-    'name': function(){
-      return 0;
-    },
-
-
-
-  });
-
-  //Pay button event functions
-  Template.pay.events({
-    'click': function(){
-      payView(true);
-    }
-
-  });
-  Template.pay.helpers({
-
-  });
-
   Template.event.helpers({
-    'payView': function(x){
+    payView: function(x){
       return x;
     }
   });
@@ -238,6 +212,7 @@ Meteor.methods({
               }
             );
           }
+          console.log('hehehe');
         }
       );
   }
