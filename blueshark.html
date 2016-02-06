@@ -21,30 +21,34 @@
   {{ /if }}
 </template>
 
-<template name="createEvent">
-  <form class="new-event">
-    <input type="text" name="link" placeholder="Enter Facebook event link" />
-    <input type="text" name="price" placeholder="Price per person" />
-    <input type="text" name="cashtag" placeholder="$cashtag" />
-    <input type="submit" value="Submit" />
-  </form>
+<template name="home">
+  <a href="#" id="join" class="pay-bring-button">Join Event</a>
+  <a href="#" id="create" class="pay-bring-button">Create Event</a>
+  {{#if showCreate}}
+    <form class="new-event">
+      <input type="text" name="link" placeholder="Enter Facebook event link" />
+      <input type="text" name="price" placeholder="Price per person" />
+      <input type="text" name="cashtag" placeholder="$cashtag" />
+      <input type="submit" value="Submit" />
+    </form>
+    {{/if}}
 </template>
 
-<template name="event">
+<!-- <template name="event">
   <h1>Dis an event</h1>
   <h2>{{title}}</h2>
   <p>{{description}}</p>
   <p><strong>Cost:</strong> its {{price}} dollars</p>
   <a href="http://cash.me/{{cashName}}/{{price}}">Pay on square binch!</a>
-</template>
+</template> -->
 
 <template name="event">
-  <div id = "event-frame">
-  	<div id = "event-info-tease">
+  <div id="event-frame">
+  	<div id="event-info-tease">
 
   	</div>
 
-  	<div id = "pay-or-bring">
+  	<div id="pay-or-bring">
   	{{> pay}}
   	{{> bring}}
   	</div>
@@ -53,15 +57,15 @@
   		{{> itemFeedPay}}
   	{{/if}}
 
-  	{{#if !payView}}
+<!--   	{{#if !(payView)}}
   		{{> itemFeedBring}}
-  	{{/if}}
+  	{{/if}} -->
   	
   </div>
 </template>
 
-<template name = "pay"><div id = "pay" class="pay-bring-button">PAY $$$</div></template>
-<template name = "bring"><div id = "bring" class="pay-bring-button">BRING IT</div></template>
+<template name = "pay"><div id="pay" class="pay-bring-button">PAY $$$</div></template>
+<template name = "bring"><div id="bring" class="pay-bring-button">BRING IT</div></template>
 
 <template name="itemFeedPay">
 	<div id = "item-feed-pay">

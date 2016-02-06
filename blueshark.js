@@ -74,7 +74,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.createEvent.events({
+  Template.home.events({
     "submit .new-event": function (event) {
       // Prevent default browser form submit
       event.preventDefault();
@@ -106,6 +106,19 @@ if (Meteor.isClient) {
       // event.target.fb-event-link.value = "";
       // event.target.recommended-price.value = "";
       // event.target.cash-name.value = "";
+    },
+
+    'click #create':function(){
+      Session.set('showCreate',true);
+    },
+    'click #join':function(){
+      Session.set('showCreate',false);
+    }
+  });
+
+  Template.home.helpers({
+    showCreateDiv: function() {
+      return Session.get('showCreate');
     }
   });
 
@@ -116,7 +129,7 @@ if (Meteor.isClient) {
 
   // Routing
   Router.route('/', function () {
-    this.render('createEvent');
+    this.render('home');
   });
 
   Router.route('/events/:_id', function () {
