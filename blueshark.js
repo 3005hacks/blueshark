@@ -80,21 +80,27 @@ if (Meteor.isClient) {
       event.preventDefault();
  
       // Get value from form element
-      var fbEventLink = event.target.link.value;
-      var recommendedPrice = event.target.price.value;
+      var eventUrl = event.target.link.value;
+      var price = event.target.price.value;
       var cashName = event.target.cashtag.value;
 
 
-      // Events.insert({
-      //   recommendedPrice: recommendedPrice,
-      //   cashName: cashName
-      // })
+      var thisId = Events.insert({
+        eventUrl: eventUrl,
+        price: price,
+        cashName: cashName,
+        title: null,
+        description: null,
+        time: null,
+      })
 
-      var urlSplit = fbEventLink.split("/");
+      var urlSplit = eventUrl.split("/");
       var eventId = urlSplit[4];
-      console.log(eventId);
 
-      Meteor.call('getFbEvent', eventId);
+
+
+      Meteor.call('getFbEvent', eventId, thisId);
+      Meteor.call('removeAllPosts');
  
       // Clear form
       // event.target.fb-event-link.value = "";
@@ -125,7 +131,6 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
-
   });
 }
 
@@ -150,21 +155,33 @@ Meteor.methods({
     }
   },
 
-  getFbEvent: function(eventId) {
-      // FB.api('/', 'POST', {
-      //     batch: [
-      //       { method: 'GET', relative_url: '/' + eventId + '/attending'},
-      //       // { method: 'GET', relative_url: currentUserData.userID},
-      //     ]
-      //   },
-      //   function (response) {
-      //     console.log(response);
-      //     if (response && !response.error) {
-      //       // var friendsData = JSON.parse(response[0].body).data;                  
+  getFbEvent: function(eventId, thisId) {
+      FB.api('/', 'POST', {
+          batch: [
+            { method: 'GET', relative_url: '/' + eventId + '/attending?access_token=' + currentUserData.userAccessToken},
+            { method: 'GET', relative_url: '/' + eventId + '?access_token=' + currentUserData.userAccessToken},
+          ]
+        },
+        function (response) {
+          if (response && !response.error) {
+            var attendees = JSON.parse(response[0].body).data;     
+            var title = JSON.parse(response[1].body).name;
+            var description = JSON.parse(response[1].body).description;
+            var time = JSON.parse(response[1].body).start_time;
 
-      //     }
-      //   }
-      // );
+            Events.update(
+              { _id : thisId }, 
+              { $set:
+                {
+                  title: title,
+                  description: description,
+                  time: time,
+                }
+              }
+            );
+          }
+        }
+      );
   }
 
 });
