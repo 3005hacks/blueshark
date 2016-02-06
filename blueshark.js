@@ -13,34 +13,50 @@ if (Meteor.isClient) {
     });
   });
 
+//HELPERS AND EVENTS ....
+Session.setDefault("payView", true);
+Session.setDefault("bringView", false);
+
   //Wish List Item Helper Functions
   Template.wishListItem.helpers({
-    'name': function(){
-      return 0;
-    },
-
-
 
   });
 
   //Pay button event functions
   Template.pay.events({
     'click': function(){
-      payView(true);
+      Session.set("payView", true);
+      Session.set("bringView", false);
     }
 
   });
+  //helpers
+  Template.pay.helpers({
+
+  });
+
+  //Pay button event functions
+  Template.bring.events({
+    'click': function(){
+      Session.set("bringView", true);
+      Session.set("payView", false);
+    }
+
+  });
+  //helpers
   Template.pay.helpers({
 
   });
 
   Template.event.helpers({
-    'payView': function(x){
-      return x;
+    'payView': function(){
+      return Session.get("payView");
+    },
+    'bringView': function(){
+      return Session.get("bringView");
     }
-  });
-  
-}
+    
+  });}
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
