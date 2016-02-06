@@ -1,13 +1,22 @@
+var isFBinit = false;
+
+currentUserData = {
+  name: null,
+  userID: null,
+  userAccessToken: null,
+  loginStatus: false,
+  proPicURL: null
+}
+
 if (Meteor.isClient) {
-
-  Meteor.subscribe("friends");
-
+  console.log("bruh");
   window.fbAsyncInit = function() {
     console.log("fb initializing...");
     FB.init({
       appId : '478980925626054',
       status : true,
-      xfbml : true
+      xfbml : true,
+      version : 'v2.4'
     });
     isFBinit = true;
     console.log("fb initialized");
@@ -18,42 +27,35 @@ if (Meteor.isClient) {
         currentUserData.userID = response.authResponse.userID;
         currentUserData.userAccessToken = response.authResponse.accessToken;
 
-        FB.api('/', 'POST', {
-            batch: [
-              { method: 'GET', relative_url: 'me/friends'},
-              { method: "GET", relative_url: currentUserData.userID},
-            ]
-          },
+        FB.api('/{name}',
             function (response) {
               if (response && !response.error) {
-                var friendsData = JSON.parse(response[0].body).data;                  
-                for (var key in friendsData) {
-                  var friend = friendsData[key];
-                  Friends.insert({
-                    name: friend.name,
-                    id: friend.id,
-                    proPicURL: "https://graph.facebook.com/" + friend.id + "/picture"
-                  });
-                }
 
                 currentUserData.proPicURL = "https://graph.facebook.com/" + currentUserData.userID + "/picture";
-                currentUserData.name = JSON.parse(response[1].body).name;
-
-                currentUserDep.changed();
+                currentUserData.name = JSON.parse(response[0].body).name;
+                console.log(response)
               }
             }
         );
 
         currentUserData.loginStatus = true;
-        currentUserDep.changed();
       }
     });
   };
 
-  Template.hello.helpers({
+  Template.login.helpers({
   });
 
-  Template.hello.events({
+  Template.login.events({
+    'click .login-button': function (e) {
+      e.preventDefault();
+      Meteor.call('fbLogin');
+    },
+
+    'click .logout-button': function (e) {
+      e.preventDefault();
+      Meteor.call('fbLogout');
+    }
   });
 
   // Routing
@@ -77,3 +79,26 @@ if (Meteor.isServer) {
 
   });
 }
+
+Meteor.methods({
+  // fbLogin: function() {
+  //   console.log('test');
+  // }
+
+  fbLogin: function() {
+    if (isFBinit){
+      FB.login();
+    }
+  },
+
+  fbLogout: function() {
+    if (isFBinit){
+
+      FB.logout();
+      currentUserData.loginStatus = false;
+      currentUserDep.changed();
+      console.log('logged out');
+    }
+  }
+
+});

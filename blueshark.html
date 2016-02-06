@@ -5,8 +5,20 @@
 <body>
   <h1>Welcome to Meteor!</h1>
 
+  {{ > login }}
+
   {{> event}}
 </body>
+
+<template name="login">
+  {{ #if isUserLoggedIn }}
+    Welcome {{ currentUserName }}
+    <img class="user-pro-pic" src="{{ currentUserProPic }}">
+    <button class="logout-button">Logout</button>
+  {{ else }}
+    <button class="login-button">Login with Facebook</button>
+  {{ /if }}
+</template>
 
 <template name="hello">
   <button>Click Me</button>
