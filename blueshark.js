@@ -49,6 +49,18 @@ if (Meteor.isClient) {
     });
   };
 
+  Template.login.events({
+    'click .login-button': function (e) {
+      e.preventDefault();
+      Meteor.call('fbLogin');
+    },
+
+    'click .logout-button': function (e) {
+      e.preventDefault();
+      Meteor.call('fbLogout');
+    }
+  });
+
   Template.login.helpers({
     currentUserName: function() {
       currentUserDep.depend();
@@ -62,7 +74,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.hello.events({
+  Template.createEvent.events({
     "submit .new-event": function (event) {
       // Prevent default browser form submit
       event.preventDefault();
@@ -72,6 +84,7 @@ if (Meteor.isClient) {
       var recommendedPrice = event.target.price.value;
       var cashName = event.target.cashtag.value;
 
+
       // Events.insert({
       //   recommendedPrice: recommendedPrice,
       //   cashName: cashName
@@ -80,6 +93,8 @@ if (Meteor.isClient) {
       var urlSplit = fbEventLink.split("/");
       var eventId = urlSplit[4];
       console.log(eventId);
+
+      Meteor.call('getFbEvent', eventId);
  
       // Clear form
       // event.target.fb-event-link.value = "";
@@ -88,21 +103,9 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.login.events({
-    'click .login-button': function (e) {
-      e.preventDefault();
-      Meteor.call('fbLogin');
-    },
-
-    'click .logout-button': function (e) {
-      e.preventDefault();
-      Meteor.call('fbLogout');
-    }
-  });
-
   // Routing
   Router.route('/', function () {
-    this.render('hello');
+    this.render('createEvent');
   });
 
   Router.route('/events/:_id', function () {
@@ -112,30 +115,6 @@ if (Meteor.isClient) {
       }
     });
   });
-
-  // FB pull
-  window.fbAsyncInit = function() {
-    console.log("Fb initi");
-    FB.init({
-      appId : '478980925626054',
-      status : true,
-      xfbml : true,
-      version : 'v2.4'
-    });
-    isFBinit = true;
-
-
-    FB.api(
-      "/{event-id}/attending",
-      function (response) {
-        if (response && !response.error) {
-          /* handle the result */
-          console.log("ok");
-        }
-      }
-    );
-  };
- 
 }
 
 if (Meteor.isServer) {
@@ -164,6 +143,23 @@ Meteor.methods({
       currentUserDep.changed();
       console.log('logged out');
     }
+  },
+
+  getFbEvent: function(eventId) {
+      // FB.api('/', 'POST', {
+      //     batch: [
+      //       { method: 'GET', relative_url: '/' + eventId + '/attending'},
+      //       // { method: 'GET', relative_url: currentUserData.userID},
+      //     ]
+      //   },
+      //   function (response) {
+      //     console.log(response);
+      //     if (response && !response.error) {
+      //       // var friendsData = JSON.parse(response[0].body).data;                  
+
+      //     }
+      //   }
+      // );
   }
 
 });
