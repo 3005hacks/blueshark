@@ -29,12 +29,12 @@ if (Meteor.isClient) {
         currentUserData.userID = response.authResponse.userID;
         currentUserData.userAccessToken = response.authResponse.accessToken;
 
-        FB.api('/{name}',
+        FB.api('/' + currentUserData.userID,
             function (response) {
               if (response && !response.error) {
 
                 currentUserData.proPicURL = "https://graph.facebook.com/" + currentUserData.userID + "/picture";
-                currentUserData.name = JSON.parse(response[0].body).name;
+                currentUserData.name = response.name;
                 
                 currentUserDep.changed();
               }
@@ -71,6 +71,11 @@ if (Meteor.isClient) {
       e.preventDefault();
       Meteor.call('fbLogout');
     }
+  });
+
+  Template.registerHelper('isUserLoggedIn', function() {
+    currentUserDep.depend();
+    return currentUserData.loginStatus;
   });
 
   // Routing
