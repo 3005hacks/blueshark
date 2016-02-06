@@ -1,5 +1,7 @@
 <head>
   <title>blueshark</title>
+
+  <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -34,4 +36,69 @@
   <p>{{description}}</p>
   <p><strong>Cost:</strong> its {{price}} dollars</p>
   <a href="http://cash.me/{{cashName}}/{{price}}">Pay on square binch!</a>
+</template>
+
+<template name="event">
+  <div id = "event-frame">
+  	<div id = "event-info-tease">
+
+  	</div>
+
+  	<div id = "pay-or-bring">
+  	{{> pay}}
+  	{{> bring}}
+  	</div>
+
+  	{{#if payView}}
+  		{{> itemFeedPay}}
+  	{{/if}}
+
+  	{{#if !payView}}
+  		{{> itemFeedBring}}
+  	{{/if}}
+  	
+  </div>
+</template>
+
+<template name = "pay"><div id = "pay" class="pay-bring-button">PAY $$$</div></template>
+<template name = "bring"><div id = "bring" class="pay-bring-button">BRING IT</div></template>
+
+<template name="itemFeedPay">
+	<div id = "item-feed-pay">
+			{{> surpriseButton}}
+
+			<div class = "title">We Need This Ish!</div>
+			{{> wishListItem}}
+	</div>
+</template>
+
+<template name="itemFeedBring">
+	<div id = "item-feed-bring">
+
+	<div class = "title">We're Bringing This Ish!</div>
+	{{> wishListBringItem}}
+		
+	</div>
+
+</template>
+
+<template name="wishListItem">
+	<div id = "wish-list-item" class="item-card">
+		<div id="item-title"></div>
+		<div id="suggested-amount-button">suggested: </div>
+		<div id="custom-amount-button"></div>
+	</div>
+</template>
+
+<template name="wishListBringItem">
+	<div id="wish-list-bring-item" class = "item-card">
+		<div id="bring-item-title"></div>
+		<div id="contributors">
+			
+		</div>
+	</div>
+</template>
+
+<template name="surpriseButton">
+	<div id = "surprise-button">Surprise Me!</div>
 </template>
