@@ -5,8 +5,40 @@
 <body>
   <h1>Welcome to Meteor!</h1>
 
+  {{ > login }}
+  <br>
+  {{ > home }}
+
+  {{#if makeEventShow}}
+    {{ > makeEvent }}
+  {{/if}}
+
   {{> event}}
 </body>
+
+<template name="login">
+  {{ #if isUserLoggedIn }}
+    Welcome {{ currentUserName }}
+    <img class="user-pro-pic" src="{{ currentUserProPic }}">
+    <button class="logout-button">Logout</button>
+  {{ else }}
+    <button class="login-button">Login with Facebook</button>
+  {{ /if }}
+</template>
+
+<template name="home">
+  {{ #if isUserLoggedIn }}
+    <button class="make-event">Make a Potluck Event</button>
+    <button class="find-event">Find a Potluck Event</button>
+  {{ /if }}
+</template>
+
+<template name="makeEvent">
+  <input type="text" name="link" placeholder="Enter Facebook event link" />
+  <input type="text" name="price" placeholder="Price per person" />
+  <input type="text" name="cashtag" placeholder="$cashtag" />
+  <input type="button" value="Submit" class="new-event" />
+</template>
 
 <template name="hello">
   <button>Click Me</button>
