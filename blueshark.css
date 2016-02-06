@@ -79,6 +79,9 @@ body {
   margin: 4rem;
   padding: 0;
 }
+p {
+  margin-top: 0;
+}
 .header {
   line-height: 2rem;
 }
@@ -109,8 +112,13 @@ body {
 }
 .submit-button {
   background-color: rgba(259, 129, 113, 1);
+  box-sizing: border-box;
   color: white;
+  cursor: pointer;
+  display: block;
   padding: 4rem;
+  text-align: center;
+  width: 100%;
 }
 .submit-button:hover {
   background-color: rgba(259, 129, 113, 0.75);
@@ -127,7 +135,9 @@ body {
   float: left;
   box-sizing: border-box;
 }
+.col-1 { width: 8.333333%; }
 .col-3 { width: 25%; }
 .col-4 { width: 33.333333%; }
 .col-6 { width: 50%; }
+.col-9 { width: 66.666666%; }
 .col-12 { width: 100%; }

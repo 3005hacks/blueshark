@@ -83,7 +83,7 @@ if (Meteor.isClient) {
       e.preventDefault();
  
       // Get value from form element
-      var eventUrl = $('input[name="link1"]').val();
+      var eventUrl = $('input[name="link"]').val();
       var price = $('input[name="price"]').val();
       var cashName = $('input[name="cashtag"]').val();
 
@@ -96,15 +96,18 @@ if (Meteor.isClient) {
         time: null,
       });
 
+      console.log(eventUrl);
       var urlSplit = eventUrl.split("/");
       var eventId = urlSplit[4];
 
       Meteor.call('getFbEvent', eventId, thisId);
  
       // Clear form
-      $('input[name="link1"]').val('');
+      $('input[name="link"]').val('');
       $('input[name="price"]').val('');
       $('input[name="cashtag"]').val('');
+
+      Router.go('/events/' + thisId);
     }
   });
 
@@ -118,33 +121,25 @@ if (Meteor.isClient) {
 
       var thisId = Events.findOne({
         eventUrl: eventUrl
-      });
+      })._id;
 
-      console.log(thisId);
-
+      Router.go('/events/' + thisId);
     }
   });
 
   Template.home.events({
-
     'click .make-event': function() {
-      Session.set('showCreate',true);
       Session.set('findEvent', false);
       Session.set('makeEvent', true);
     },
 
     'click .find-event': function() {
-      Session.set('showCreate',false);
       Session.set('findEvent', true);
       Session.set('makeEvent', false);
     }
   });
 
   Template.home.helpers({
-    showCreateDiv: function() {
-      return Session.get('showCreate');
-    },
-    
     makeEventShow: function(){
       return Session.get('makeEvent');
     },
@@ -201,19 +196,34 @@ Meteor.methods({
   getFbEvent: function(eventId, thisId) {
       FB.api('/', 'POST', {
           batch: [
-            { method: 'GET', relative_url: '/' + eventId + '/attending?access_token=' + currentUserData.userAccessToken},
+            { method: 'GET', relative_url: '/' + eventId + '/attending?limit=500&access_token=' + currentUserData.userAccessToken},
             { method: 'GET', relative_url: '/' + eventId + '?access_token=' + currentUserData.userAccessToken},
           ]
         },
         function (response) {
           if (response && !response.error) {
-            var attendees = JSON.parse(response[0].body).data;     
+            var attendees = JSON.parse(response[0].body).data;
             var title = JSON.parse(response[1].body).name;
             var description = JSON.parse(response[1].body).description;
             var time = JSON.parse(response[1].body).start_time;
 
+            for (var i = 0; i < attendees.length; i++) {
+              Events.update(
+                { _id : thisId },
+                { $push:
+                  {
+                    attendees: {
+                      name: attendees[i].name,
+                      id: attendees[i].id,
+                      paying: null,
+                    }
+                  }
+                }
+              )
+            };
+
             Events.update(
-              { _id : thisId }, 
+              { _id : thisId },
               { $set:
                 {
                   title: title,
