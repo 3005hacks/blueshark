@@ -1,14 +1,19 @@
 <head>
   <title>blueshark</title>
-
-  <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
-  <h1>It&rsquo;s Potluck Time!</h1>
+  <h1>Welcome to Meteor!</h1>
 
   {{ > login }}
+  <br>
+  {{ > landingPage }}
 
+  {{#if makeEventShow}}
+    {{ > makeEvent }}
+  {{/if}}
+
+  {{> event}}
 </body>
 
 <template name="login">
@@ -21,90 +26,29 @@
   {{ /if }}
 </template>
 
-<template name="home">
-  <div id="" class="pay-bring-button">Join Event</div>
-  <div class="pay-bring-button">Create Event</div>
-  {{#if showCreate}}
-    <form class="new-event">
-      <input type="text" name="link" placeholder="Enter Facebook event link" />
-      <input type="text" name="price" placeholder="Price per person" />
-      <input type="text" name="cashtag" placeholder="$cashtag" />
-      <input type="submit" value="Submit" />
-    </form>
-    {{/if}}
+<template name="landingPage">
+  {{ #if isUserLoggedIn }}
+    <button class="make-event">Make a Potluck Event</button>
+    <button class="find-event">Find a Potluck Event</button>
+  {{ /if }}
 </template>
 
-<!-- <template name="event">
-  <h1>Dis an event</h1>
-  <h2>{{title}}</h2>
-  <p>{{description}}</p>
-  <p><strong>Cost:</strong> its {{price}} dollars</p>
-  <a href="http://cash.me/{{cashName}}/{{price}}">Pay on square binch!</a>
-</template> -->
+<template name="makeEvent">
+  bruhhhh
+  <form class="new-event">
+    <input type="text" name="link" placeholder="Enter Facebook event link" />
+    <input type="text" name="price" placeholder="Price per person" />
+    <input type="text" name="cashtag" placeholder="$cashtag" />
+    <input type="submit" value="Submit" />
+  </form>
+</template>
+
+<template name="hello">
+  <button>Click Me</button>
+  <p>You've pressed the button {{counter}} times.</p>
+  <h2>Create Event</h2>
+</template>
 
 <template name="event">
-  <div id="event-frame">
-  	<div id="event-info-tease">
-
-  	</div>
-
-  	<div id="pay-or-bring">
-  	{{> pay}}
-  	{{> bring}}
-  	</div>
-
-  	{{#if payView}}
-  		{{> itemFeedPay}}
-  	{{/if}}
-
-<!--   	{{#if !(payView)}}
-  		{{> itemFeedBring}}
-  	{{/if}} -->
-  	
-  </div>
-</template>
-
-<template name = "pay"><div id="pay" class="pay-bring-button">PAY $$$</div></template>
-<template name = "bring"><div id="bring" class="pay-bring-button">BRING IT</div></template>
-
-<template name="itemFeedPay">
-	<div id = "item-feed-pay">
-			{{> surpriseButton}}
-
-			<div class = "title">We Need This Ish!</div>
-			{{> wishListItem}}
-	</div>
-</template>
-<template name="makeEvent">
-
-</template>
-
-<template name="itemFeedBring">
-	<div id = "item-feed-bring">
-
-	<div class = "title">We're Bringing This Ish!</div>
-	{{> wishListBringItem}}
-		
-	</div>
-</template>
-
-<template name="wishListItem">
-	<div id = "wish-list-item" class="item-card">
-		<div id="item-title"></div>
-		<div id="suggested-amount-button">suggested: </div>
-		<div id="custom-amount-button"></div>
-	</div>
-</template>
-
-<template name="wishListBringItem">
-	<div id="wish-list-bring-item" class = "item-card">
-		<div id="bring-item-title"></div>
-		<div id="contributors">
-			
-		</div>
-	</div>
-</template>
-
-<template name="surpriseButton">
-	<div id = "surprise-button">Surprise Me!</div>
+  <h1>Dis an event</h1>
 </template>
