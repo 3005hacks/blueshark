@@ -3,12 +3,7 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{ > login }}
-  <br>
-  {{ > home }}
-
+  <h1>Time 2 Potluck =)</h1>
   {{#if makeEventShow}}
     {{ > makeEvent }}
   {{/if}}
@@ -22,28 +17,30 @@
     <img class="user-pro-pic" src="{{ currentUserProPic }}">
     <button class="logout-button">Logout</button>
   {{ else }}
-    <button class="login-button">Login with Facebook</button>
+    <!-- <button class="login-button">Login with Facebook</button> -->
+    <div class="fb-login-button login-button" data-max-rows="1" data-size="xlarge" data-show-faces="false" data-auto-logout-link="false"></div>
   {{ /if }}
 </template>
 
 <template name="home">
+  {{ > login }}
   {{ #if isUserLoggedIn }}
-    <button class="make-event">Make a Potluck Event</button>
-    <button class="find-event">Find a Potluck Event</button>
+  <div class="clearfix buttons">
+    <div class="make-event col col-6 child ">Make a Potluck Event</div>
+    <div class="find-event col col-6 child">Find a Potluck Event</div>
+  </div>
   {{ /if }}
 </template>
 
 <template name="makeEvent">
-  <input type="text" name="link" placeholder="Enter Facebook event link" />
-  <input type="text" name="price" placeholder="Price per person" />
-  <input type="text" name="cashtag" placeholder="$cashtag" />
-  <input type="button" value="Submit" class="new-event" />
-</template>
-
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
-  <h2>Create Event</h2>
+  <div class="clearfix form">
+    <div class="col col-6">
+      <input type="text" name="link" placeholder="Enter Facebook event link" />
+      <input type="text" name="price" placeholder="Price per person" />
+      <input type="text" name="cashtag" placeholder="$cashtag" />
+      <input type="button" value="Submit" class="new-event submit-button" />
+    </div>
+  </div>
 </template>
 
 <template name="event">
