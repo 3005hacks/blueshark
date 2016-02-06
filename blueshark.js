@@ -1,5 +1,8 @@
 var isFBinit = false;
 
+var makeEventVal = false;
+var createEventVal = false;
+
 currentUserData = {
   name: null,
   userID: null,
@@ -9,6 +12,9 @@ currentUserData = {
 }
 
 var currentUserDep = new Tracker.Dependency();
+
+var makeEventDep = new Tracker.Dependency();
+var makeEventVal = null;
 
 if (Meteor.isClient) {
   window.fbAsyncInit = function() {
@@ -73,6 +79,24 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.landingPage.events({
+    'click .make-event':function(){
+      makeEventVal = true;
+      makeEventDep.changed();
+    },
+    'click .find-event':function(){
+      makeEventVal = false;
+      makeEventDep.changed();
+    }
+  });
+
+  Template.body.helpers({
+    makeEventShow: function(){
+      makeEventDep.depend();
+      return makeEventVal;
+    }
+  });
+
   Template.registerHelper('isUserLoggedIn', function() {
     currentUserDep.depend();
     return currentUserData.loginStatus;
@@ -101,9 +125,6 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  // fbLogin: function() {
-  //   console.log('test');
-  // }
 
   fbLogin: function() {
     if (isFBinit){
@@ -119,6 +140,14 @@ Meteor.methods({
       currentUserDep.changed();
       console.log('logged out');
     }
-  }
+  },
+
+  makeEvent: function() {
+
+  },
+
+  findEvent: function() {
+
+  },
 
 });

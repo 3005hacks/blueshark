@@ -6,6 +6,12 @@
   <h1>Welcome to Meteor!</h1>
 
   {{ > login }}
+	<br>
+	{{ > landingPage }}
+
+	{{#if makeEventShow}}
+		{{ > makeEvent }}
+	{{/if}}
 
   {{> event}}
 </body>
@@ -18,6 +24,17 @@
   {{ else }}
     <button class="login-button">Login with Facebook</button>
   {{ /if }}
+</template>
+
+<template name="landingPage">
+	{{ #if isUserLoggedIn }}
+		<button class="make-event">Make a Potluck Event</button>
+		<button class="find-event">Find a Potluck Event</button>
+  {{ /if }}
+</template>
+
+<template name="makeEvent">
+	bruh
 </template>
 
 <template name="hello">
