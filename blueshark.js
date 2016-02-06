@@ -50,6 +50,8 @@ if (Meteor.isClient) {
       // event.target.fb-event-link.value = "";
       // event.target.recommended-price.value = "";
       // event.target.cash-name.value = "";
+    }
+  });
 
   Template.login.events({
     'click .login-button': function (e) {
@@ -96,9 +98,9 @@ if (Meteor.isClient) {
           console.log("ok");
         }
       }
-  );
+    );
   };
-  
+ 
 }
 
 if (Meteor.isServer) {
