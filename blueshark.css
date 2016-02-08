@@ -1,13 +1,112 @@
 /* CSS declarations go here */
 
 /*EVENT FRAME*/
+  .feed{
+
+  }
+  .feed img{
+  	height: 2rem;
+  	width: auto;
+  	padding: 1% 2% 0% 2%;
+  }
+  #item-feed-pay{
+    width: 45%;
+    margin: 8% 27.5% 5% 27.5%;
+  } 
+		#surprise-button{
+			background-color: #CC2936;
+			text-align: center;
+			line-height: 5rem;
+			height: 5rem;
+			width: 50%;
+			margin: 5% 25% 5% 25%;
+			border-radius: 2rem;
+			font-size: 2rem;
+		}
+
+			.title{
+				text-align: center;
+				color: #08415C;
+				font-size: 2rem;
+				margin: 8% 0 3% 0;
+			}
+			.subtitle{
+				text-align: center;
+				color: white;
+				font-size: 1.2rem;
+				margin: 0 0 0 0;
+			}
+
+		.item-card{
+			height: 10rem;
+			border: solid 1.5px #CC2936; 
+			border-radius: 2rem;
+			background-color: #CC2936;
+			margin: 3% 0 3% 0;
+			padding: 5% 5% 5% 5%;
+		}
+			.card-title{
+				font-size: 3.5rem;
+			}
+			.card-button{
+				float: left;
+				margin: 5% 10% 5% 10%;
+				font-size: 1.2rem;
+				line-height: 2.7;
+				text-align: center;
+				max-height: 3.5rem;
+				width: 30%;
+				background-color: #F4AC45;
+				border-radius: 2rem;
+				overflow: hidden;
+			}
+
+	#item-feed-bring{
+		width: 45%;
+		margin: 8% 27.5% 5% 27.5%;
+
+	}
+		#suggested-amount-button{
+
+		}
+
+/*EVENT FRAME*/
 #event-frame{
-  background-color: white;
-  height: 100vh;
-  margin: 0 0 0 0;
-  color: white;
-  font-family: 'Josefin Sans', sans-serif;
-  font-size: 10px;
+	background-color: white;
+	height: 100vh;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	color: white;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 10px;
+}
+	#event-info-tease{
+		height: 22vh;
+		width: 100%;
+		background-color: #CC2936;
+		font-family: 'Quicksand', sans-serif;
+		font-size: 5rem;
+		line-height: 10rem;
+		text-align: center;
+	}
+	#pay-or-bring{
+		width: 100%;
+		overflow: hidden;
+	}
+		#pay{
+			background-color: #F4AC45;
+		}
+		#bring{
+			background-color: #08415C;
+		}
+		.pay-bring-button{
+			float: left;
+			width: 50%;
+			height: 10vh;
+			font-size: 2rem;
+			text-align: center;
+			line-height: 5rem;
+		}
 }
   #event-info-tease{
     height: 20vh;
@@ -141,3 +240,5 @@ p {
 .col-6 { width: 50%; }
 .col-9 { width: 66.666666%; }
 .col-12 { width: 100%; }
+=======
+    }

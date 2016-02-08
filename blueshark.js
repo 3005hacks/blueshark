@@ -61,9 +61,30 @@ if (Meteor.isClient) {
     }
   });
 
+
+  //HELPERS AND EVENTS ....
+  Session.setDefault("payView", true);
+  Session.setDefault("bringView", false);
+
+  //Wish List Item Helper Functions
+  Template.wishListItem.helpers({
+
+  });
+
+  //Pay button event functions
+  Template.pay.events({
+    'click': function(){
+      Session.set("payView", true);
+      Session.set("bringView", false);
+    }
+
+  });
+
+  //sets defaults for make and find event
   Session.setDefault('makeEvent', false);
   Session.setDefault('findEvent', false);
 
+  //HELPERS for LOGIN
   Template.login.helpers({
     currentUserName: function() {
       currentUserDep.depend();
@@ -77,6 +98,7 @@ if (Meteor.isClient) {
     }
   });
 
+  //EVENTS for MAKE_EVENT
   Template.makeEvent.events({
     'click .new-event': function(e) {
       // Prevent default browser form submit
@@ -111,6 +133,7 @@ if (Meteor.isClient) {
     }
   });
 
+
   Template.findEvent.events({
     'click .find-event': function(e) {
       // Prevent default browser form submit
@@ -127,6 +150,15 @@ if (Meteor.isClient) {
     }
   });
 
+  //EVENTS for BRING
+  Template.bring.events({
+    'click': function(){
+      Session.set("bringView", true);
+      Session.set("payView", false);
+    }
+   });
+
+  //EVENTS for HOME
   Template.home.events({
     'click .make-event': function() {
       Session.set('findEvent', false);
@@ -139,7 +171,15 @@ if (Meteor.isClient) {
     }
   });
 
+  //HELPERS for HOME
   Template.home.helpers({
+    showCreateDiv: function() {
+      return Session.get('showCreate');
+    }
+  });
+
+  //HELPERS for BODY
+  Template.body.helpers({
     makeEventShow: function(){
       return Session.get('makeEvent');
     },
@@ -149,16 +189,17 @@ if (Meteor.isClient) {
     }
   });
 
+  //registered HELPER for user login
   Template.registerHelper('isUserLoggedIn', function() {
     currentUserDep.depend();
     return currentUserData.loginStatus;
   });
 
-  // Routing
+
+  // ROUTING!
   Router.route('/', function () {
     this.render('home');
   });
-
   Router.route('/events/:_id', function () {
     this.layout('event', {
       data: function () {
@@ -173,6 +214,16 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
   });
+
+  //HELPERS for EVENT
+  Template.event.helpers({
+    'payView': function(){
+      return Session.get("payView");
+    },
+    'bringView': function(){
+      return Session.get("bringView");    
+  }
+    });
 }
 
 Meteor.methods({
@@ -239,3 +290,9 @@ Meteor.methods({
   }
 
 });
+
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    // code to run on server at startup
+  });
+}

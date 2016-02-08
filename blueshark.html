@@ -1,5 +1,9 @@
 <head>
   <title>blueshark</title>
+
+
+  <link href='https://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
@@ -26,6 +30,63 @@
   {{/if}}
 </template>
 
+  {{ > login }}
+  <br>
+  {{ > home }}
+
+  {{ > event}}
+</body>
+
+
+<template name="event">
+  <div id = "event-frame">
+
+  	{{> eventInfoTease}}
+
+  	{{> pay}}
+  	{{> bring}}
+  	{{title}}
+
+		{{#if payView}}
+			{{> itemFeedPay}}
+		{{/if}}
+
+		{{#if bringView}}
+			{{> itemFeedBring}}
+		{{/if}}
+
+		{{#if makeEventShow}}
+    	{{> makeEvent}}
+  	{{/if}}
+  </div>
+</template>
+
+<!-- TEMPLATES FOR THE EVENT TEMPLATE -->
+<template name = "eventInfoTease">
+	<div id="event-info-tease">
+		<div> Test {{title}} </div>
+		<div class="subtitle" id="time">{{time}}</div>
+	</div>
+	
+</template>
+<template name = "pay"><div id = "pay" class="pay-bring-button">PAY $$$</div></template>
+<template name = "bring"><div id = "bring" class="pay-bring-button">BRING IT</div></template>
+
+<template name = "itemFeedPay">
+	<div id = "item-feed-pay" class = "feed">
+			{{ > surpriseButton}}
+			<div class = "title">We Need Dis <img src="../img/plus.png"></div>
+			{{ > wishListItem}}
+	</div>
+</template>
+
+<template name="itemFeedBring">
+	<div id = "item-feed-bring" class = "feed">
+			<div class="title">We Got Dis <img src="../img/plus.png"></div>
+			{{ > wishListBringItem}}
+	</div>
+</template>
+
 <template name="login">
   {{ #if isUserLoggedIn }}
     Welcome {{ currentUserName }}
@@ -35,6 +96,27 @@
     <!-- <button class="login-button">Login with Facebook</button> -->
     <div class="fb-login-button login-button" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="false"></div>
   {{ /if }}
+</template>
+
+<template name="wishListItem">
+	<div id = "wish-list-item" class="item-card">
+		<div id="item-title" class="card-title">test</div>
+		<div id="suggested-amount-button" class = "card-button">suggested: ${{price}}</div>
+		<div id="custom-amount-button" class = "card-button">custom $</div>
+	</div>
+</template>
+
+<template name="wishListBringItem">
+	<div id="wish-list-bring-item" class ="item-card">
+		<div id="bring-item-title" class="card-title">Test</div>
+		<div id="contributors">
+
+		</div>
+	</div>
+</template>
+
+<template name="surpriseButton">
+	<div id = "surprise-button">Surprise Me!</div>
 </template>
 
 <template name="makeEvent">
@@ -79,3 +161,8 @@
     </div>
   </div>
 </template>
+
+<template name="hello">
+
+</template>
+
