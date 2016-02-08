@@ -1,0 +1,243 @@
+/* CSS declarations go here */
+
+/*EVENT FRAME*/
+  .feed{
+
+  }
+  .feed img{
+  	height: 2rem;
+  	width: auto;
+  	padding: 1% 2% 0% 2%;
+  }
+  #item-feed-pay{
+    width: 45%;
+    margin: 8% 27.5% 5% 27.5%;
+  } 
+		#surprise-button{
+			background-color: #CC2936;
+			text-align: center;
+			line-height: 5rem;
+			height: 5rem;
+			width: 50%;
+			margin: 5% 25% 5% 25%;
+			border-radius: 2rem;
+			font-size: 2rem;
+		}
+
+			.title{
+				text-align: center;
+				color: #08415C;
+				font-size: 2rem;
+				margin: 8% 0 3% 0;
+			}
+			.subtitle{
+				text-align: center;
+				color: white;
+				font-size: 1.2rem;
+				margin: 0 0 0 0;
+			}
+
+		.item-card{
+			height: 10rem;
+			border: solid 1.5px #CC2936; 
+			border-radius: 2rem;
+			background-color: #CC2936;
+			margin: 3% 0 3% 0;
+			padding: 5% 5% 5% 5%;
+		}
+			.card-title{
+				font-size: 3.5rem;
+			}
+			.card-button{
+				float: left;
+				margin: 5% 10% 5% 10%;
+				font-size: 1.2rem;
+				line-height: 2.7;
+				text-align: center;
+				max-height: 3.5rem;
+				width: 30%;
+				background-color: #F4AC45;
+				border-radius: 2rem;
+				overflow: hidden;
+			}
+
+	#item-feed-bring{
+		width: 45%;
+		margin: 8% 27.5% 5% 27.5%;
+
+	}
+		#suggested-amount-button{
+
+		}
+
+/*EVENT FRAME*/
+#event-frame{
+	background-color: white;
+	height: 100vh;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+	color: white;
+	font-family: 'Josefin Sans', sans-serif;
+	font-size: 10px;
+}
+	#event-info-tease{
+		height: 22vh;
+		width: 100%;
+		background-color: #CC2936;
+		font-family: 'Quicksand', sans-serif;
+		font-size: 5rem;
+		line-height: 10rem;
+		text-align: center;
+	}
+	#pay-or-bring{
+		width: 100%;
+		overflow: hidden;
+	}
+		#pay{
+			background-color: #F4AC45;
+		}
+		#bring{
+			background-color: #08415C;
+		}
+		.pay-bring-button{
+			float: left;
+			width: 50%;
+			height: 10vh;
+			font-size: 2rem;
+			text-align: center;
+			line-height: 5rem;
+		}
+}
+  #event-info-tease{
+    height: 20vh;
+    width: 100%;
+    background-color: #CC2936;
+  }
+  #pay-or-bring{
+    width: 100%;
+    overflow: hidden;
+    
+  }
+    #pay{
+      background-color: #F4AC45;
+    }
+    #bring{
+      background-color: #08415C;
+    }
+    .pay-bring-button{
+      float: left;
+      width: 50%;
+      height: 10vh;
+      font-size: 2rem;
+      text-align: center;
+      line-height: 5rem;
+    }
+
+  #item-feed-pay{
+    width: 45%;
+    margin: 3% 27.5% 5% 27.5%;
+
+  } 
+
+  #item-feed-bring{
+    width: 45%;
+    margin: 3% 27.5% 5% 27.5%;
+
+  }
+
+    #surprise-button{
+      background-color: #CC2936;
+      text-align: center;
+      line-height: 5rem;
+      height: 5rem;
+      width: 50%;
+      margin: 0 25% 0 25%;
+      border-radius: 2rem;
+      font-size: 2rem;
+    }
+      .title{
+        text-align: center;
+        color: #08415C;
+        font-size: 2rem;
+        margin: 8% 0 3% 0;
+      }
+    .item-card{
+      height: 10rem;
+      border: solid 1.5px #CC2936; 
+      border-radius: 2rem;
+      background-color: #CC2936;
+      margin: 3% 0 3% 0;
+    }
+
+
+/* home page */
+body {
+  background-color: #222;
+  color: white;
+  font-family: 'Avenir', sans-serif;
+  margin: 4rem;
+  padding: 0;
+}
+p {
+  margin-top: 0;
+}
+.header {
+  line-height: 2rem;
+}
+.login {
+  text-align: right;
+}
+.buttons {
+  /*background-color: #fb8171;*/
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  text-align: center;
+}
+.buttons > div {
+  background-color: rgba(259, 129, 113, 1);
+  padding: 4rem;
+}
+.buttons > div:hover {
+  background-color: rgba(259, 129, 113, 0.75);
+}
+.form input {
+  border: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  width: 100%;
+}
+.submit-button {
+  background-color: rgba(259, 129, 113, 1);
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  display: block;
+  padding: 4rem;
+  text-align: center;
+  width: 100%;
+}
+.submit-button:hover {
+  background-color: rgba(259, 129, 113, 0.75);
+}
+
+/* Columns */
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+.clearfix:after { clear: both; }
+.col {
+  float: left;
+  box-sizing: border-box;
+}
+.col-1 { width: 8.333333%; }
+.col-3 { width: 25%; }
+.col-4 { width: 33.333333%; }
+.col-6 { width: 50%; }
+.col-9 { width: 66.666666%; }
+.col-12 { width: 100%; }
+    }
