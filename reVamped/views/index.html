@@ -10,6 +10,7 @@
     
     <!-- JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
 
   </head>
 
@@ -30,12 +31,12 @@
       <input type="text" name="price" placeholder="Price per person" />
       <input type="text" name="cashtag" placeholder="$cashtag" />
       <input type="text" name="wishlist" placeholder="Wish List - what do you want people to bring?" />
-      <input type="button" value="Submit" class="new-event submit-button" />
+      <input id="make-event-submit" type="button" value="Submit" class="submit-button" />
     </div>
 
     <div class="find-event-form hidden">
       <input type="text" name="link2" placeholder="Enter Facebook event link" />
-      <input type="button" value="Submit" class="find-event submit-button" />
+      <input id="find-event-submit" type="button" value="Submit" class="submit-button" />
     </div>
 
 <!--     <div class="clearfix buttons">
