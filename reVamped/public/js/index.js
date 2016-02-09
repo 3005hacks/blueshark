@@ -3,14 +3,15 @@ var socket = io();
 
 // on Make Event button click
 $('.make-event').click( function(){
-    $('.make-event-form').show();
-    $('.find-event-form').hide();
+    $('.make-event-form').slideToggle();
+    $('.paragraph').toggle();
+    $('.make-event').toggleClass('active');
 });
 
 // on Find Event button click
 $('.find-event').click( function(){
-    $('.make-event-form').hide();
-    $('.find-event-form').show();
+    $('.find-event-form').slideToggle();
+    $('.find-event').toggleClass('active');
 });
 
 // on Make Event submit
