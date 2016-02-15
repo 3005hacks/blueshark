@@ -17,10 +17,12 @@ $('.find-event').click( function(){
 // on Make Event submit
 $('#make-event-submit').click( function(){
 
-    // console.log each input in Make Event form
-    $('.make-event-form>input[type="text"]').each( function(index){
-        console.log($(this).val());
-    });
+    var link = $('.make-event-form>input[name="link"]').val();
+    var price = $('.make-event-form>input[name="price"]').val();
+    var wishlist = $('.make-event-form>input[name="wishlist"]').val();
+
+    makeEvent(link, price, wishlist);
+
 });
 
 // on Make Event submit
@@ -34,6 +36,11 @@ $('#find-event-submit').click( function(){
 
 $('input[name="link"]').click( function(){
 
+});
+
+$('#fb-login-button').click( function() {
+  fbLogin();
+  $('#fb-login-button').hide();
 });
 
 socket.on('fbEventURL', function(msg){
