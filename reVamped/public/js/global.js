@@ -1,5 +1,3 @@
-g = '';
-
 currentUserData = {
   name: null,
   userID: null,
