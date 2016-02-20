@@ -1,4 +1,4 @@
-currentUserData = {
+userData = {
   name: null,
   userID: null,
   userAccessToken: null,
@@ -6,7 +6,7 @@ currentUserData = {
   proPicURL: null
 };
 
-currentEvent = {
+eventData = {
 	eventID: null,
 	name: null,
 	coverPhoto: null,
