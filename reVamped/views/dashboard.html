@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Potluck</title>
+
+  <!-- CSS -->
+  
+  <link href="https://npmcdn.com/basscss@8.0.0/css/basscss.min.css" rel="stylesheet">
+  <link href="https://npmcdn.com/basscss-btn@1.1.1/css/btn.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/css/landing.css">
+  
+  <!-- JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+  <script src="/js/modal.js" type="text/javascript"></script>
+
+  <script type="text/javascript">
+    function openCreateEvent() {
+      Modal.show('.create-event');
+    }
+    function closeDialog() {
+      Modal.hide()
+    }
+    function openSettings(){
+      Modal.show('.settings');
+    }
+  </script>
+
+</head>
+<body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=510841125734589";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
+  <div class="container">
+    <div class="clearfix white-bg">
+      <div class="col col-6">
+        <p class="h1 green uppercase bold">Potluck</p>
+      </div>
+      <div class="col col-6 lh-5">
+        <!-- This is the button to use for FB login if the official one doesn't work -->
+        <!-- <div id="fb-login-button" class="fb-blue uppercase pointer right lh-5"><p><i class="fa fa-facebook-official fa-lg"></i> Log In</p></div> -->
+        <div class="fb-login-button right" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>
+      </div>
+    </div>
+
+    <div class="clearfix">
+      <div class="col col-4">
+        <button onclick="javascript:openCreateEvent();" class="btn green-bg green-hover white modalButton">Add an event</button>
+      </div>
+      <div class="col col-8"></div>
+    </div>
+
+    <div class="clearfix border-bottom">
+      <div class="col col-12">
+        <p class="h2">Upcoming Events</p>
+      </div>
+    </div>
+
+    <div class="clearfix border-bottom">
+      <!-- Each event link goes in this link -->
+      <a href="http://twitter.com" class="link-nostyle text-decoration-none">
+        <div class="col col-5">
+          <p class="bold align-middle">Event title here</p>
+        </div>
+      </a>
+      <div class="col col-4">
+        <p class="align-middle">Date here</p>
+      </div>
+      <div class="col col-3">
+        <p class="align-middle uppercase bold green">Host <i class="fa fa-cog grey pointer" onclick="javascript:openSettings()"></i></p>
+      </div>
+    </div>
+
+
+    <div class="clearfix">
+      <div class="col col-12">
+        <p>A <a href="http://3005hacks.com">3005hacks</a> project.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal create-event white-bg p4 border rounded">
+    <p class="h2">Add an event</p>
+    <input type="text" class="input" name="link" placeholder="Enter Facebook event link" />
+    <input type="text" class="input" name="price" placeholder="Price per person" />
+    <input type="text" class="input" name="cashtag" placeholder="$cashtag" />
+    <input type="text" class="input" name="wishlist" placeholder="Wish List - what do you want people to bring?" />
+    <input type="button" id="make-event-submit" class="btn green-bg green-hover white" value="Submit" />
+  </div>
+
+  <div class="modal settings white-bg p4 border rounded">
+    <p class="h2">Event Settings</p>
+    <p><i class="fa fa-trash-o"></i> Delete event</p>
+  </div>
+
+  <div class="cover"></div>
+</body>
+</html>
