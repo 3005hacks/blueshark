@@ -25,7 +25,7 @@ $('#make-event-submit').click( function(){
 
 });
 
-// on Make Event submit
+// on find Event submit
 $('#find-event-submit').click( function(){
 
     // console.log each input in Find Event form

@@ -13,6 +13,16 @@ app.get('/', function(req, res) {
 	res.sendFile(__dirname + '/views/index.html');
 });
 
+// should probably change '/landing' => '/', but use this for test
+app.get('/landing', function(req, res) {
+  res.sendFile(__dirname + '/views/landing.html');
+});
+
+// should also change this route
+app.get('/dash', function(req, res) {
+  res.sendFile(__dirname + '/views/dashboard.html');
+});
+
 app.get('/:eventID', function(req, res) {
 	res.sendFile(__dirname + '/views/forms.html');
 	io.emit('fbEventURL', req.params.eventID);
