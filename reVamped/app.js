@@ -28,7 +28,7 @@ io.on('connection', function(socket) {
 });
 
 // mongoDB
-var url = 'mongodb://localhost:3000/test';
+var url = 'mongodb://localhost:27017/test';
 
 MongoClient.connect(url, function(err, db) {
   assert.equal(null, err);

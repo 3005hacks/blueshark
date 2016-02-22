@@ -1,3 +1,5 @@
+dummyEvents = {0:"168997749816194"};
+
 window.fbAsyncInit = function() {
 	FB.init({
 	  appId      : '478980925626054',
@@ -35,13 +37,14 @@ function fbLogin() {
     		// using batch POST request so if we want to pull more data later we can
         batch: [
           { method: "GET", relative_url: userData.userID},
+          { method: "GET", relative_url: userData.userID + '/events'},
         ]
       },
         function (response) {
           if (response && !response.error) {
-          	console.log(response);
             userData.name = JSON.parse(response[0].body).name;
             userData.proPicURL = "https://graph.facebook.com/" + userData.userID + "/picture";
+            userData.eventsAttending = JSON.parse(response[1].body).data;
           }
         });
 		};
@@ -79,8 +82,19 @@ function makeEvent(link, price, wishlist) {
       }
     }
   );
-
 };
+
+function getHostings() {
+	// query Events collection for Hosts
+}
+
+function getAttendings() {
+	for (var eventAttending in userData.eventsAttending) {
+		if (eventAttending in dummyEvents) {
+			console.log(eventAttending);
+		}
+	}
+}
 
 (function(d, s, id) {
 	var js, fjs = d.getElementsByTagName(s)[0];

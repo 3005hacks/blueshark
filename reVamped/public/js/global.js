@@ -3,7 +3,8 @@ userData = {
   userID: null,
   userAccessToken: null,
   loginStatus: false,
-  proPicURL: null
+  proPicURL: null,
+  eventsAttending: null,
 };
 
 eventData = {
@@ -14,5 +15,6 @@ eventData = {
 	attendees: null,
 	description: null,
 	wishlist: null,
-	suggestedAmount: null
+	suggestedAmount: null,
+	squareCashInfo: null,
 };
