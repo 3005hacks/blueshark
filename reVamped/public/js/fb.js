@@ -1,3 +1,5 @@
+dummyEvents = {0:"168997749816194"};
+
 window.fbAsyncInit = function() {
 	FB.init({
 	  appId      : '478980925626054',
@@ -27,21 +29,22 @@ function fbLogin() {
 	  	console.log('connected');
 	  	$('.landing').show();
 
-	  	currentUserData.loginStatus = true;
-	  	currentUserData.userID = response.authResponse.userID;
-      currentUserData.userAccessToken = response.authResponse.accessToken;
+	  	userData.loginStatus = true;
+	  	userData.userID = response.authResponse.userID;
+      userData.userAccessToken = response.authResponse.accessToken;
 
       FB.api('/', 'POST', {
     		// using batch POST request so if we want to pull more data later we can
         batch: [
-          { method: "GET", relative_url: currentUserData.userID},
+          { method: "GET", relative_url: userData.userID},
+          { method: "GET", relative_url: userData.userID + '/events'},
         ]
       },
         function (response) {
           if (response && !response.error) {
-          	console.log(response);
-            currentUserData.name = JSON.parse(response[0].body).name;
-            currentUserData.proPicURL = "https://graph.facebook.com/" + currentUserData.userID + "/picture";
+            userData.name = JSON.parse(response[0].body).name;
+            userData.proPicURL = "https://graph.facebook.com/" + userData.userID + "/picture";
+            userData.eventsAttending = JSON.parse(response[1].body).data;
           }
         });
 		};
@@ -51,17 +54,17 @@ function fbLogin() {
 function makeEvent(link, price, wishlist) {
 
 	// link in the form of 'www.facebook.com/events/123456789'
-	currentEvent.eventID = link.split("/")[4];
+	eventData.eventID = link.split("/")[4];
 
-	currentEvent.suggestedAmount = price;
-	currentEvent.wishlist = wishlist;
+	eventData.suggestedAmount = price;
+	eventData.wishlist = wishlist;
 
   FB.api('/', 'POST', {
 			// using batch POST request so if we want to pull more data later we can
 	    batch: [
-				{ method: 'GET', relative_url: '/' + currentEvent.eventID},
-				{ method: 'GET', relative_url: '/' + currentEvent.eventID + '/attending'},
-				{ method: 'GET', relative_url: '/' + currentEvent.eventID + '?fields=cover'},
+				{ method: 'GET', relative_url: '/' + eventData.eventID},
+				{ method: 'GET', relative_url: '/' + eventData.eventID + '/attending'},
+				{ method: 'GET', relative_url: '/' + eventData.eventID + '?fields=cover'},
 			]
   	},
     function (response) {
@@ -69,18 +72,29 @@ function makeEvent(link, price, wishlist) {
       	console.log(response);
 
       	eventParsedResponse = JSON.parse(response[0].body);
-        currentEvent.name = eventParsedResponse.name;
-      	currentEvent.description = eventParsedResponse.description;
-      	currentEvent.startTime = eventParsedResponse.start_time;
+        eventData.name = eventParsedResponse.name;
+      	eventData.description = eventParsedResponse.description;
+      	eventData.startTime = eventParsedResponse.start_time;
 
-      	currentEvent.attendees = JSON.parse(response[1].body);
+      	eventData.attendees = JSON.parse(response[1].body);
 
-      	currentEvent.coverPhoto = JSON.parse(response[2].body).cover.source;
+      	eventData.coverPhoto = JSON.parse(response[2].body).cover.source;
       }
     }
   );
-
 };
+
+function getHostings() {
+	// query Events collection for Hosts
+}
+
+function getAttendings() {
+	for (var eventAttending in userData.eventsAttending) {
+		if (eventAttending in dummyEvents) {
+			console.log(eventAttending);
+		}
+	}
+}
 
 (function(d, s, id) {
 	var js, fjs = d.getElementsByTagName(s)[0];

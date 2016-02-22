@@ -1,12 +1,13 @@
-currentUserData = {
+userData = {
   name: null,
   userID: null,
   userAccessToken: null,
   loginStatus: false,
-  proPicURL: null
+  proPicURL: null,
+  eventsAttending: null,
 };
 
-currentEvent = {
+eventData = {
 	eventID: null,
 	name: null,
 	coverPhoto: null,
@@ -14,5 +15,6 @@ currentEvent = {
 	attendees: null,
 	description: null,
 	wishlist: null,
-	suggestedAmount: null
+	suggestedAmount: null,
+	squareCashInfo: null,
 };
