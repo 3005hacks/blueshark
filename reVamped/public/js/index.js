@@ -22,7 +22,7 @@ $('#make-event-submit').click( function(){
     var wishlist = $('.make-event-form>input[name="wishlist"]').val();
 
     makeEvent(link, price, wishlist);
-
+    socket.emit("createEvent", eventData);
 });
 
 // on find Event submit

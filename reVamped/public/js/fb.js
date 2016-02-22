@@ -80,8 +80,8 @@ function makeEvent(link, price, wishlist) {
 
       	eventData.coverPhoto = JSON.parse(response[2].body).cover.source;
       }
-    }
-  );
+    });
+
 };
 
 function getHostings() {
