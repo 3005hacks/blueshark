@@ -51,13 +51,14 @@ function fbLogin() {
 	}, {scope:'user_events'});
 }
 
-function makeEvent(link, price, wishlist) {
+function makeEvent(link, price, wishlist, squarecashName, callback) {
 
 	// link in the form of 'www.facebook.com/events/123456789'
 	eventData.eventID = link.split("/")[4];
 
 	eventData.suggestedAmount = price;
 	eventData.wishlist = wishlist;
+    eventData.squareCashInfo = squarecashName;
 
   FB.api('/', 'POST', {
 			// using batch POST request so if we want to pull more data later we can
@@ -80,8 +81,9 @@ function makeEvent(link, price, wishlist) {
 
       	eventData.coverPhoto = JSON.parse(response[2].body).cover.source;
       }
-    }
-  );
+
+      callback();
+    });
 };
 
 function getHostings() {

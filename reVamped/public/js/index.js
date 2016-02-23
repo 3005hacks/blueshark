@@ -1,6 +1,11 @@
 // instantiates socket
 var socket = io();
 
+function emitEvent() {
+
+    socket.emit("createEvent", eventData);
+}
+
 // on Make Event button click
 $('.make-event').click( function(){
     $('.make-event-form').slideToggle();
@@ -20,9 +25,9 @@ $('#make-event-submit').click( function(){
     var link = $('.make-event-form>input[name="link"]').val();
     var price = $('.make-event-form>input[name="price"]').val();
     var wishlist = $('.make-event-form>input[name="wishlist"]').val();
+    var squareCash = $('.make-event-form>input[name="cashtag"]').val();
 
-    makeEvent(link, price, wishlist);
-
+    makeEvent(link, price, wishlist, squareCash, emitEvent);
 });
 
 // on find Event submit

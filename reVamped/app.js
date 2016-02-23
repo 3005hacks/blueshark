@@ -3,9 +3,11 @@ var app = express();
 var path = require('path');
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
-
+var ObjectId = require('mongodb').ObjectID;
+var url = 'mongodb://localhost:27017/test';
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
+var mongo = require('./server/db');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -34,14 +36,18 @@ http.listen(3000, function() {
 
 // socket.io
 io.on('connection', function(socket) {
+
+    socket.on('createEvent', function(mongoData) {
+
+        MongoClient.connect(url, function(err, db) {
+
+            assert.equal(null, err);
+
+            mongo.insertDocument(db, 'events', mongoData, function() {
+                db.close();
+            });
+        });
+    });
+
 	console.log('socket.io connected');
-});
-
-// mongoDB
-var url = 'mongodb://localhost:27017/test';
-
-MongoClient.connect(url, function(err, db) {
-  assert.equal(null, err);
-  console.log("Connected correctly to server.");
-  db.close();
 });
