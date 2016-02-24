@@ -25,6 +25,10 @@ app.get('/dash', function(req, res) {
   res.sendFile(__dirname + '/views/dashboard.html');
 });
 
+app.get('/event_temp', function(req, res) {
+    res.sendFile(__dirname + '/views/event.html');
+});
+
 app.get('/:eventID', function(req, res) {
 	res.sendFile(__dirname + '/views/forms.html');
 	io.emit('fbEventURL', req.params.eventID);

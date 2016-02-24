@@ -1,0 +1,223 @@
+body, html{
+	background-color: #D62839;
+	font-family: 'Muli', sans-serif;
+	height: 100%;
+	width: 100%;
+	margin: 0 0 0 0;
+	font-size: 10px;
+	position: relative;
+	z-index: 0;
+}
+.header{
+	height: 25vh;
+	color: white;
+	overflow: hidden;
+}
+	.header-left{
+		float: left;
+		width: 27%;
+		overflow: hidden;
+	}
+		.header-left img{
+			width: 100%;
+			height: auto;
+		}
+	.header-right{
+		float: left;
+		width: 73%;
+	}
+		.event-title{
+			font-size: 10rem;
+			text-align: center;
+			color: white;
+			margin: 3rem 0 auto 0;
+			z-index: 1;
+		}
+.content{
+	height: 75vh;
+
+}
+	.sidebar{
+		width: 23%;
+		height: 100%;
+		float: left;
+		color: white;
+		padding-left: 3%;
+		padding-right: 1%;
+		background-color: #0E84A1;
+	}
+		.event-time{
+			padding-top: 10%;
+		}
+		.event-date{
+
+		}
+		.datetime{
+			font-size: 2rem;
+			margin: 0rem 0rem 2rem 0rem;
+		}
+		.event-descript{
+			font-style: italic;
+			font-size: 1.8rem;
+		}
+	.feed{
+		width: 73%;
+		height: 100%;
+		float: left;
+		background-color: white;
+		overflow: scroll;
+	}
+		.feed-header{
+			text-align: center;
+			padding-top: 2%;
+		}
+			.button1{
+				height: 5rem;
+				width: 25%;
+				border: 2px solid;
+				border-color: #D62839;
+				margin: 2%;
+				display: inline-block;
+				color: #D62839;
+				font-size: 2rem;
+				line-height: 5rem;
+				cursor: pointer;
+				overflow: hidden;
+			}
+			.button1:hover{
+				background-color: #D62839;
+				color: white;
+			}
+			.chip-in{
+
+			}
+			.bring{
+
+			}
+			.peep-list-hub{
+				margin: 2%;
+			}
+			.peep-list-dropdown{
+				display: none;
+			}
+			.peep-list{
+				text-align: center;
+				height: 4rem;
+				width: 25%;
+				border: 2px solid;
+				border-color: #D62839;
+				background-color: #D62839;
+				display: block;
+				color: white;
+				font-size: 1.6rem;
+				line-height: 4rem;
+				cursor: pointer;
+				overflow: hidden;				
+			}
+			.peep-list:hover{
+				border-color: white;
+			}
+				.list-item{
+					height: 4rem;
+					border: 2px solid;
+					border-color: #D62839;
+					background-color: white;
+					width: 25%;					
+				}
+					.list-item-title{
+						color: #D62839;
+						font-size: 1.6rem;
+						line-height: 4rem;
+						width: 80%;
+						float: left;
+						margin-left: 2%;
+						text-align: left;
+					}
+					.list-item-cost{
+						color: #D62839;
+						font-size: 1.6rem;
+						line-height: 4rem;
+						float: left;
+					}
+				.select-list-item{
+						color: #D62839;
+						font-size: 1.6rem;
+						line-height: 4rem;
+				}
+				.add-item{
+					height: 4rem;
+					background-color: #D62839;
+					color: white;
+					font-size: 1.6rem;
+					line-height: 4rem;
+					cursor: pointer;
+					z-index: 0;
+				}
+				.add-item:hover{
+					border-color: white;
+				}
+				.new-item-name{
+					width: 100%;
+					padding: 0;
+					display: none;
+				}
+				.new-item-price{
+					display: none;
+				}
+			.item-card{
+				margin: 4% 0 4% 0;
+				padding: 1%;
+				width: 45%;
+				border: 2px solid;
+				border-color: #D62839;
+				height: 14rem;
+				overflow: hidden;
+			}
+				.item-title{
+					font-size: 2rem;
+					max-height: 3rem;
+					text-align: left;
+					color: #D62839;
+					float: left;
+					width: 88%;
+				}
+				.item-icon{
+					height: 3rem;
+					width: 3rem;
+					border: #D62839 solid 2px;
+					border-radius: 50%;
+				}
+					.item-icon img{
+						height: 2.5rem;
+						width: auto;
+						padding: 0.1rem; 
+\\
+					}
+				.icon-shell{
+					width: 8%;
+					float: left;
+				}
+				.loading-bar{
+					width: 70%;
+					border: #D62839 solid 2px;
+					height: 3rem;
+					display: block;
+					clear: left;
+					margin: 2rem;
+				}
+				.button-shell{
+					padding-top: 5%;
+				}
+				.button2{
+					height: 5rem;
+					width: 5rem;
+					border: solid;
+					border-radius: 50%;
+					background-color: #D62839;
+					color: white;
+					float: left;
+					display: none;
+				}
+.footer{
+
+}
