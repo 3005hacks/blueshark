@@ -53,5 +53,19 @@ io.on('connection', function(socket) {
         });
     });
 
+    socket.on('findEvent', function(objectKey) {
+
+        MongoClient.connect(url, function(err, db) {
+
+            assert.equal(null, err);
+
+            mongo.findEventByID(db, 'events', objectKey, function() {
+
+                console.log("Nothing was found for this ID: " + objectKey);
+                db.close();
+            });
+        });
+    });
+
 	console.log('socket.io connected');
 });

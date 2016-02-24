@@ -13,14 +13,21 @@ module.exports = {
   });
 },
 
-findRestaurants: function(db, callback) {
-   var cursor = db.collection('restaurants').find( );
+findEventByID: function(db, className, objectKey, callback) {
+
+   var cursor = db.collection(className).find({'eventID': objectKey});
+
    cursor.each(function(err, doc) {
+
       assert.equal(err, null);
+
       if (doc != null) {
-         console.dir(doc);
-      } else {
-         callback();
+        
+         console.log(doc);
+      } 
+      else {
+
+        callback();
       }
     });
   }
