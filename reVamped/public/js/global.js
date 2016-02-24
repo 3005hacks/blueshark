@@ -17,4 +17,5 @@ eventData = {
 	wishlist: null,
 	suggestedAmount: null,
 	squareCashInfo: null,
+	hostID: null,
 };

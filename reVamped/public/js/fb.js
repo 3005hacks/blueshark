@@ -1,5 +1,3 @@
-dummyEvents = {0:"168997749816194"};
-
 window.fbAsyncInit = function() {
 	FB.init({
 	  appId      : '478980925626054',
@@ -8,24 +6,9 @@ window.fbAsyncInit = function() {
 	});
 
 
-	// // triggered on fbLogin and fbLogout
-	// FB.Event.subscribe('auth.authResponseChange', function(response) {
-	// 	if (response.status === 'unknown') {
-	// 		fbLogin();
-	// 	}
-	// 	else if  (response.status === 'not_authorized') {
-	// 		console.log(1);
-	// 	}
-	// 	else {
-	// 		console.log(2);	
-	// 	}
-	// });
-
-};
-
-function fbLogin() {
-	FB.login(function(response) {
-	  if (response.status === 'connected') {
+	// triggered on fbLogin and fbLogout
+	FB.Event.subscribe('auth.authResponseChange', function(response) {
+		if (response.status === 'connected') {
 	  	console.log('connected');
 	  	$('.landing').show();
 
@@ -34,22 +17,24 @@ function fbLogin() {
       userData.userAccessToken = response.authResponse.accessToken;
 
       FB.api('/', 'POST', {
-    		// using batch POST request so if we want to pull more data later we can
-        batch: [
-          { method: "GET", relative_url: userData.userID},
-          { method: "GET", relative_url: userData.userID + '/events'},
-        ]
-      },
+	    		// using batch POST request so if we want to pull more data later we can
+	        batch: [
+	          { method: "GET", relative_url: userData.userID},
+	          { method: "GET", relative_url: userData.userID + '/events'},
+	        ]
+	      },
         function (response) {
           if (response && !response.error) {
             userData.name = JSON.parse(response[0].body).name;
             userData.proPicURL = "https://graph.facebook.com/" + userData.userID + "/picture";
             userData.eventsAttending = JSON.parse(response[1].body).data;
           }
+          populateDashboard();
         });
-		};
-	}, {scope:'user_events'});
-}
+			}
+	});
+
+};
 
 function makeEvent(link, price, wishlist, squarecashName, callback) {
 
@@ -66,6 +51,7 @@ function makeEvent(link, price, wishlist, squarecashName, callback) {
 				{ method: 'GET', relative_url: '/' + eventData.eventID},
 				{ method: 'GET', relative_url: '/' + eventData.eventID + '/attending'},
 				{ method: 'GET', relative_url: '/' + eventData.eventID + '?fields=cover'},
+				{ method: 'GET', relative_url: '/' + eventData.eventID + '/owner'},
 			]
   	},
     function (response) {
@@ -80,23 +66,12 @@ function makeEvent(link, price, wishlist, squarecashName, callback) {
       	eventData.attendees = JSON.parse(response[1].body);
 
       	eventData.coverPhoto = JSON.parse(response[2].body).cover.source;
+      	eventData.hostID = JSON.parse(response[3].body);
       }
 
       callback();
     });
 };
-
-function getHostings() {
-	// query Events collection for Hosts
-}
-
-function getAttendings() {
-	for (var eventAttending in userData.eventsAttending) {
-		if (eventAttending in dummyEvents) {
-			console.log(eventAttending);
-		}
-	}
-}
 
 (function(d, s, id) {
 	var js, fjs = d.getElementsByTagName(s)[0];
