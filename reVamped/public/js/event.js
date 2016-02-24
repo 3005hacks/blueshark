@@ -1,0 +1,12 @@
+$('.peep-list').click(function(){
+	$('.peep-list-dropdown').slideToggle();
+});
+$('.add-item').click(function(){
+	$('.new-item-name').slideToggle();
+});
+$('.new-item-name').click(function(){
+	$('.new-item-price').slideToggle();
+});
+$('.new-item-price').click(function(){
+	$('.add-item').slideToggle();
+});

@@ -35,6 +35,10 @@ app.get('/event_temp', function(req, res) {
   res.sendFile(__dirname + '/views/event.html');
 });
 
+app.get('/event_temp', function(req, res) {
+	res.sendFile(__dirname + '/views/event.html');
+});
+
 app.get('/:eventID', function(req, res) {
   // res.sendFile(__dirname + '/views/forms.html');
   data = {eventTitle: 'Yeezy Just Jumped Over Jumpman', eventDate: '5/30/3005', eventHost: 'Yeezy Reincarnated'};
