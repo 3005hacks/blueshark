@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<!-- This is the sign-in page. -->
+<html>
+
+  <head>
+    <title>Potluck</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    
+    <!-- JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdn.socket.io/socket.io-1.0.0.js"></script>
+
+  </head>
+
+  <body>
+  	
+    <div class="logo">
+      <h1>Potluck</h1>
+    </div>
+
+    <img id="fb-login-button" class="pointer" src="img/fbLogin.png">
+
+    <div class="landing hidden">
+      <div class="clearfix buttons">
+        <div class="make-event col col-6 child">Make a Potluck Event</div>
+        <div class="find-event col col-6 child">Find a Potluck Event</div>
+      </div>
+    </div>
+
+    <div class="form clearfix">
+      <div class="make-event-form hidden col col-6">
+        <input type="text" name="link" placeholder="Enter Facebook event link" />
+        <input type="text" name="price" placeholder="Price per person" />
+        <input type="text" name="cashtag" placeholder="$cashtag" />
+        <input type="text" name="wishlist" placeholder="Wish List - what do you want people to bring?" />
+        <input id="make-event-submit" type="button" value="Submit" class="submit-button" />
+      </div>
+      <div class="paragraph col col-6"><p></p></div>
+      <div class="find-event-form hidden col col-6">
+        <input type="text" name="link2" placeholder="Enter Facebook event link" />
+        <input id="find-event-submit" type="button" value="Submit" class="submit-button" />
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script type="text/javascript" src="/js/globalClient.js"></script>
+    <script type="text/javascript" src="/js/fb.js"></script>
+    <script type="text/javascript" src="/js/dashboard.js"></script>
+
+  </body>
+
+</html>
