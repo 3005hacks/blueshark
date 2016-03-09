@@ -47,7 +47,7 @@ window.fbAsyncInit = function() {
 
 // populates global eventData object
 function makeEvent(link, price, wishlist, squarecashName, callback) {
-
+  alert(eventData);
   // event ID
 	eventData.eventID = link.split("/")[4];
 
@@ -71,7 +71,6 @@ function makeEvent(link, price, wishlist, squarecashName, callback) {
   	},
     function (response) {
       if (response && !response.error) {
-      	console.log(response);
 
         // general event data
       	eventParsedResponse = JSON.parse(response[0].body);
@@ -93,6 +92,7 @@ function makeEvent(link, price, wishlist, squarecashName, callback) {
 
         // ID of event owner
       	eventData.hostID = JSON.parse(response[3].body);
+        // console.log(eventData);
       }
 
       // callback calls eventEmitter

@@ -1,7 +1,7 @@
 /*
 
 name: global.js
-description: contains objects and variables used throughout client-side code
+description: contains objects and variables used throughout all code
 
 */
 

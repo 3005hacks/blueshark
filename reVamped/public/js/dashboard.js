@@ -25,7 +25,7 @@ function openSettings(){
 
 // on Make Event submit
 $('#make-event-submit').click( function(){
-
+  alert(eventData);
   // records data from Add an Event box
   var link = $('.make-event-form>input[name="link"]').val();
   var price = $('.make-event-form>input[name="price"]').val();
