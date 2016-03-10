@@ -1,5 +1,5 @@
 {
-  "name": "Potluck",
+  "name": "blueshark",
   "version": "0.0.1",
   "description": "Facilitate event planning and budgeting",
   "dependencies": {
@@ -7,5 +7,20 @@
     "path": "^0.12.7",
     "socket.io": "^1.3.7",
     "mongodb": "~2.0"
-  }
+  },
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/3005hacks/blueshark.git"
+  },
+  "author": "3005hacks",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/3005hacks/blueshark/issues"
+  },
+  "homepage": "https://github.com/3005hacks/blueshark#readme"
 }
