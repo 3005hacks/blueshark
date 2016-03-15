@@ -106,40 +106,40 @@ $('#make-event-submit').click( function() {
 });
 
 // goes through list of events being attended by user and populates dashboard
-function populateDashboard() {
-  for (var event in userData.eventsAttending) {
+// function populateDashboard() {
+//   for (var event in userData.eventsAttending) {
 
-    // event ID
-    var eventID = userData.eventsAttending[event].id;
+//     // event ID
+//     var eventID = userData.eventsAttending[event].id;
 
-    // event name
-    var eventName = userData.eventsAttending[event].name;
+//     // event name
+//     var eventName = userData.eventsAttending[event].name;
 
-    // event start date
-    var eventDate = userData.eventsAttending[event].start_time;
+//     // event start date
+//     var eventDate = userData.eventsAttending[event].start_time;
 
-    // checks database for event
-    socket.emit("findEvent", eventID, function(err, data){
-      if (err != null) {
-        console.log(err);
-        console.log('dafuqqqq');
-        callback(err);
-      }
-      else {
-        console.log('data');
-      }
-    });
+//     // checks database for event
+//     socket.emit("findEvent", eventID, function(err, data){
+//       if (err != null) {
+//         console.log(err);
+//         console.log('dafuqqqq');
+//         callback(err);
+//       }
+//       else {
+//         console.log('data');
+//       }
+//     });
 
-    // console.log(123);
-    // socket.on('findEventSuccess', function(eventIsBlueshark) {
-    //   console.log(12322);
-    //   if (eventIsBlueshark) {
-    //     var eventHost = 'Host';
-    //   }
-    //   else {
-    //     var eventHost = 'Attending';
-    //   }
-    // });
-    // console.log(eventHost);
-  }
-};
+//     // console.log(123);
+//     // socket.on('findEventSuccess', function(eventIsBlueshark) {
+//     //   console.log(12322);
+//     //   if (eventIsBlueshark) {
+//     //     var eventHost = 'Host';
+//     //   }
+//     //   else {
+//     //     var eventHost = 'Attending';
+//     //   }
+//     // });
+//     // console.log(eventHost);
+//   }
+// };

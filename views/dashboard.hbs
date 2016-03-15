@@ -1,27 +1,5 @@
-<!-- FB button code -->
-<div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=510841125734589";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-<!-- End of FB button -->
-
 <div class="container">
-  <div class="clearfix white-bg">
-    <div class="col col-6">
-      <p class="h1 green uppercase bold">Potluck</p>
-    </div>
-    <div class="col col-6 lh-5">
-      <!-- This is the button to use for FB login if the official one doesn't work -->
-      <!-- <div id="fb-login-button" class="fb-blue uppercase pointer right lh-5"><p><i class="fa fa-facebook-official fa-lg"></i> Log In</p></div> -->
-      <div class="fb-login-button right" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" data-scope="user_events"></div>
-    </div>
-  </div>
+  {{> "header" }}
 
   <div class="clearfix">
     <div class="col col-4">
@@ -56,11 +34,7 @@
   </div>
 
 
-  <div class="clearfix">
-    <div class="col col-12">
-      <p>A <a href="http://3005hacks.com">3005hacks</a> project.</p>
-    </div>
-  </div>
+  {{> "footer" }}
 </div>
 
 <div class="make-event-form modal create-event white-bg p4 border rounded">

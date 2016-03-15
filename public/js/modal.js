@@ -45,9 +45,9 @@ var Modal = (function(){
     document.removeEventListener( 'click', onDocumentClick, false );
     document.removeEventListener( 'touchstart', onDocumentClick, false );
 
-    removeClass( container, 'dialogIsOpen' );
-    removeClass( container, 'create-eventIsOpen' );
-    removeClass( container, 'settingsIsOpen' );
+    removeClass( container, 'dialog-is-open' );
+    removeClass( container, 'create-event-is-open' );
+    removeClass( container, 'settings-is-open' );
     removeClass( popup, 'avgrund-popup-animate')
   }
 
@@ -66,7 +66,7 @@ var Modal = (function(){
   function show(selector){
     popup = document.querySelector( selector );
     selectorName = selector.slice(1);
-    addClass(container, selectorName + 'IsOpen dialogIsOpen');
+    addClass(container, selectorName + '-is-open dialog-is-open');
     activate();
     return this;
   }

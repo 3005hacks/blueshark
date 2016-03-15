@@ -1,0 +1,120 @@
+html,
+body {
+  color: $body-text;
+  font-family: 'Clear Sans', sans-serif;
+  line-height: 1.5;
+  margin: 0;
+}
+
+header {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.nav {
+  z-index: 100;
+}
+
+.lh-5 {
+  line-height: 5;
+}
+
+.border {
+  border-color: $grey;
+}
+
+.border-bottom {
+  border-bottom-color: $grey;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.green {
+  color: $green;
+}
+
+.green-bg {
+  background-color: $green;
+}
+
+.green-hover:hover {
+  background-color: $green-hover;
+}
+
+.white {
+  color: $white;
+}
+
+.white-bg {
+  background-color: $white;
+}
+
+.fb-blue {
+  color: $fb-blue;
+}
+
+.grey {
+  color: $grey;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.link-nostyle {
+  color: inherit;
+}
+
+// columns
+.container {
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 58em;
+}
+
+// Basscss Forms
+.label {
+  display: block;
+  font-size: .875rem;
+  font-weight: bold;
+  margin-bottom: .5rem;
+}
+
+.input {
+  border: 1px solid $form-border;
+  border-radius: 3px;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  height: 1.5rem;
+  margin-bottom: 1rem;
+  padding: .5rem;
+  width: 100%;
+}
+
+.select {
+  border: 1px solid $form-border;
+  border-radius: 3px;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  height: 2.5rem;
+  margin-bottom: 1rem;
+  padding: .5rem;
+  width: 100%;
+}
+
+.textarea {
+  border: 1px solid $form-border;
+  border-radius: 3px;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  margin-bottom: 1rem;
+  padding: .5rem;
+  width: 100%;
+}
