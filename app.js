@@ -6,31 +6,7 @@ description: server code to run Node application
 */
 
 // global vars and objects
-// var global = require('./server/global');
-
-// object populated on user login
-userData = {
-  name: null,
-  userID: null,
-  userAccessToken: null,
-  loginStatus: false,
-  proPicURL: null,
-  eventsAttending: null,
-};
-
-// object populated when event is created or selected
-eventData = {
-  eventID: null,
-  name: null,
-  coverPhoto: null,
-  startTime: null,
-  attendees: null,
-  description: null,
-  wishlist: null,
-  suggestedAmount: null,
-  squareCashInfo: null,
-  hostID: null,
-};
+var global = require('./server/global');
 
 // framework for node
 var express = require('express');
@@ -83,14 +59,11 @@ app.get('/dash', function(req, res) {
   res.render('dashboard', data);
 });
 
-// holder variable for template data for event.handlebars
-var eventTemplateData = {};
-
 // routing for event page
-app.get('/:eventID', function(req, res) {
-  console.log(eventData);
+app.get('/event/:eventID', function(req, res) {
+  // console.log(eventData);
   // renders event template and fills it with data
-  res.render('event', eventTemplateData);
+  res.render('event', eventData);
 });
 
 /************** socket.io **************/
@@ -135,7 +108,6 @@ io.on('connection', function(socket) {
 
   // listener for sendEventData
   socket.on('sendEventData', function(data) {
-    console.log(data);
-    eventTemplateData = data;
+    eventData = data;
   });
 });

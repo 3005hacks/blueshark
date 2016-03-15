@@ -1,14 +1,14 @@
 <div class = "header">
-	<div class = "header-left"><img src="/img/cover.jpg"></div>
+	<div class = "header-left"><img src="{{ coverPhoto }}"></div>
 	<div class = "header-right"><div class = "event-title">B17 Binch!</div></div>
 </div>
 
 <div class = "content clearfix">
 	<div class = "sidebar">
-		<div class = "event-time datetime">8:00 pm</div>
-		<div class = "event-date datetime">Tuesday, February 16, 3005</div>
-		<div class = "event-descript datetime">Real hacker hour...who up? If you'll be right by my side, til 3005, you better git pull origin SMASH that mf like button!*!*!</div>
-		<div class = "event-suggested-amount datetime">Suggested Amount: $4</div>
+		<div class = "event-time datetime">{{ startTime }}</div>
+		<!-- <div class = "event-date datetime">Tuesday, February 16, 3005</div> -->
+		<div class = "event-descript datetime">{{ description }}</div>
+		<div class = "event-suggested-amount datetime">Suggested Amount: ${{ suggestedAmount }}</div>
 	</div>
 	<div class = "feed">
 		<div class = "feed-header">
