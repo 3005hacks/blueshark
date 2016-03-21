@@ -5,9 +5,6 @@ description: client-side code for populating dashboard and other front-end funct
 
 */
 
-// instantiates socket
-var socket = io();
-
 // SOPHIE
 function openCreateEvent() {
   Modal.show('.create-event');
@@ -69,7 +66,7 @@ $('#make-event-submit').click( function() {
         { method: 'GET', relative_url: '/' + eventData.eventID},
         { method: 'GET', relative_url: '/' + eventData.eventID + '/attending'},
         { method: 'GET', relative_url: '/' + eventData.eventID + '?fields=cover'},
-        { method: 'GET', relative_url: '/' + eventData.eventID + '/owner'},
+        { method: 'GET', relative_url: '/' + eventData.eventID + '?fields=owner'},
       ]
     },
     function (response) {
@@ -98,48 +95,12 @@ $('#make-event-submit').click( function() {
         // sends data to app.js to fill event template
         socket.emit('sendEventData', eventData);
 
+        // sends data to database
+        socket.emit("makeEvent", eventData);
+
         // opens eventUI page
         window.open('/event/'+eventData.eventID,'_self');
       }
     });
 
 });
-
-// goes through list of events being attended by user and populates dashboard
-function populateDashboard() {
-  for (var event in userData.eventsAttending) {
-
-    // event ID
-    var eventID = userData.eventsAttending[event].id;
-
-    // event name
-    var eventName = userData.eventsAttending[event].name;
-
-    // event start date
-    var eventDate = userData.eventsAttending[event].start_time;
-
-    // checks database for event
-    socket.emit("findEvent", eventID, function(err, data){
-      if (err != null) {
-        console.log(err);
-        console.log('dafuqqqq');
-        callback(err);
-      }
-      else {
-        console.log('data');
-      }
-    });
-
-    // console.log(123);
-    // socket.on('findEventSuccess', function(eventIsBlueshark) {
-    //   console.log(12322);
-    //   if (eventIsBlueshark) {
-    //     var eventHost = 'Host';
-    //   }
-    //   else {
-    //     var eventHost = 'Attending';
-    //   }
-    // });
-    // console.log(eventHost);
-  }
-};
