@@ -34,10 +34,10 @@ module.exports = {
 
       // if eventID IS found
       if (doc != null) {
-        callback(null, doc);
+        console.log(doc);
       } 
       else {
-        callback("Nothing was found for this ID: " + objectKey);
+        //callback("Nothing was found for this ID: " + objectKey);
       }
     });
   }
