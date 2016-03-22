@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8" />
-  <title></title>
+  <title>{{#block "title"}}Potluck{{/block}}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <link rel="stylesheet" type="text/css" href="/css/style.min.css">
@@ -18,6 +19,14 @@
     fjs.parentNode.insertBefore(js, fjs);
   }(document, 'script', 'facebook-jssdk'));</script>
 
+  <div class="clearfix white-bg">
+  <div class="col col-6">
+    <p class="h1 green uppercase bold">Potluck</p>
+  </div>
+  <div class="col col-6 lh-5">
+    <div class="fb-login-button right" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true"></div>
+  </div>
+</div>
 {{{body}}}
 <script src="js/global.js"></script>
 

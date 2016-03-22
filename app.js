@@ -28,9 +28,12 @@ var mongo = require('./server/db');
 
 // Handlebars view engine for Express
 var exphbs  = require('express-handlebars');
-// app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+var layouts = require('handlebars-layouts')
+
+exphbs.Handlebars.registerHelpers(layouts(exphbs));
+
 app.engine('.hbs', exphbs({
-  defaultLayout: 'main',
+  defaultLayout: 'page',
   extname: '.hbs'
 }));
 app.set('view engine', '.hbs');
