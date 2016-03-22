@@ -6,31 +6,7 @@ description: server code to run Node application
 */
 
 // global vars and objects
-// var global = require('./server/global');
-
-// object populated on user login
-userData = {
-  name: null,
-  userID: null,
-  userAccessToken: null,
-  loginStatus: false,
-  proPicURL: null,
-  eventsAttending: null,
-};
-
-// object populated when event is created or selected
-eventData = {
-  eventID: null,
-  name: null,
-  coverPhoto: null,
-  startTime: null,
-  attendees: null,
-  description: null,
-  wishlist: null,
-  suggestedAmount: null,
-  squareCashInfo: null,
-  hostID: null,
-};
+var global = require('./server/global');
 
 // framework for node
 var express = require('express');
@@ -52,11 +28,16 @@ var mongo = require('./server/db');
 
 // Handlebars view engine for Express
 var exphbs  = require('express-handlebars');
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
-app.set('view engine', 'handlebars');
+var layouts = require('handlebars-layouts')
+
+app.engine('.hbs', exphbs({
+  defaultLayout: 'page',
+  extname: '.hbs'
+}));
+app.set('view engine', '.hbs');
 
 // lets you access css, js, and img files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // instantiates http server
 http.listen(3000, function() {
@@ -76,21 +57,16 @@ var dashboardTemplateData = {};
 // routing for dashboard page
 app.get('/dash', function(req, res) {
 
-  // dummy data
-  data = {eventTitle: 'Yeezy Just Jumped Over Jumpman', eventDate: '5/30/3005', eventHost: 'Yeezy Reincarnated'};
-  
   // renders dashboard template and fills it with data
-  res.render('dashboard', data);
+  console.log(dashboardPopulation);
+  res.render('dashboard', dashboardPopulation);
 });
 
-// holder variable for template data for event.handlebars
-var eventTemplateData = {};
-
 // routing for event page
-app.get('/:eventID', function(req, res) {
-  console.log(eventData);
+app.get('/event/:eventID', function(req, res) {
+  // console.log(eventData);
   // renders event template and fills it with data
-  res.render('event', eventTemplateData);
+  res.render('event', eventData);
 });
 
 /************** socket.io **************/
@@ -113,29 +89,49 @@ io.on('connection', function(socket) {
   });
 
   // listener for findEvent
-  socket.on('findEvent', function(objectKey, callback) {
-
+  socket.on('populateDashboard', function(eventsAttending) {
     MongoClient.connect(url, function(err, db) {
 
       assert.equal(null, err);
 
-      mongo.findEventByID(db, 'events', objectKey, function(err, data) {
+      for (var event in eventsAttending) {
 
-        if (err != null) {
-          console.log(err);
-          callback(err);
-        }
-        else {
-          callback(null, data);
-        }
-        db.close();
-      });
+        mongo.findEventByID(db, 'events', eventsAttending[event].id, function(result) {
+
+          // if (err != null) {
+          //   console.log(err);
+          //   callback(err);
+          // }
+          // else {
+          //   callback(null, data);
+          // }
+          // callback();
+        
+          // event ID
+          var eventID = result.eventID;
+
+          // event name
+          var eventName = result.name;
+
+          // event start date
+          var eventDate = result.startTime;
+
+          if (result.hostID == userData.userID) {
+            var eventType = 'Host';
+          }
+          else
+            var eventType = 'Attending';
+
+          dashboardPopulation.push({'eventID': eventID, 'eventName': eventName, 'eventDate':eventDate, 'eventType':eventType});
+
+        });
+      }
     });
   });
 
   // listener for sendEventData
   socket.on('sendEventData', function(data) {
-    console.log(data);
-    eventTemplateData = data;
+    eventData = data;
   });
+
 });

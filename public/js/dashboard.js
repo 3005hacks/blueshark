@@ -5,9 +5,6 @@ description: client-side code for populating dashboard and other front-end funct
 
 */
 
-// instantiates socket
-var socket = io();
-
 // SOPHIE
 function openCreateEvent() {
   Modal.show('.create-event');
@@ -23,71 +20,87 @@ function openSettings(){
   Modal.show('.settings');
 }
 
+// // on Make Event submit
+// $('#make-event-submit').click( function(){
+//   // records data from Add an Event box
+//   var link = $('.make-event-form>input[name="link"]').val();
+//   var price = $('.make-event-form>input[name="price"]').val();
+//   var wishlist = $('.make-event-form>input[name="wishlist"]').val();
+//   var squareCash = $('.make-event-form>input[name="cashtag"]').val();
+
+//   // populates global eventData object and saves to db
+//   makeEvent(link, price, wishlist, squareCash);
+
+//   socket.emit("makeEvent", eventData);
+
+//   // sends data to app.js to fill event template
+//   socket.emit('sendEventData', eventData);
+
+//   // opens eventUI page
+//   window.open('/event/'+eventData.eventID,'_self');
+// });
+
 // on Make Event submit
-$('#make-event-submit').click( function(){
-  alert(eventData);
+$('#make-event-submit').click( function() {
   // records data from Add an Event box
   var link = $('.make-event-form>input[name="link"]').val();
   var price = $('.make-event-form>input[name="price"]').val();
   var wishlist = $('.make-event-form>input[name="wishlist"]').val();
   var squareCash = $('.make-event-form>input[name="cashtag"]').val();
 
-  // populates global eventData object and saves to db
-  makeEvent(link, price, wishlist, squareCash, function(err, data) {
-    if (err != null) {
-      console.log(err);
-    }
-    else {
-      // saves event data to db
-      socket.emit("makeEvent", eventData);
-    }
-  });
+  // event ID
+  eventData.eventID = link.split("/")[4];
 
-  // closes the Add an Event box
-  closeDialog();
+  // suggested amount
+  eventData.suggestedAmount = price;
 
-  // sends data to app.js to fill event template
-  socket.emit('sendEventData', eventData);
+  // wishlist
+  eventData.wishlist = wishlist;
 
-  // opens eventUI page
-  window.open('/'+eventData.eventID,'_self');
-});
+  // SquareCash username?
+  eventData.squareCashInfo = squareCash;
 
-// goes through list of events being attended by user and populates dashboard
-function populateDashboard() {
-  for (var event in userData.eventsAttending) {
+  // FB API call for event information
+  FB.api('/', 'POST', {
+      batch: [
+        { method: 'GET', relative_url: '/' + eventData.eventID},
+        { method: 'GET', relative_url: '/' + eventData.eventID + '/attending'},
+        { method: 'GET', relative_url: '/' + eventData.eventID + '?fields=cover'},
+        { method: 'GET', relative_url: '/' + eventData.eventID + '?fields=owner'},
+      ]
+    },
+    function (response) {
+      if (response && !response.error) {
+        // general event data
+        eventParsedResponse = JSON.parse(response[0].body);
 
-    // event ID
-    var eventID = userData.eventsAttending[event].id;
+        // event name
+        eventData.name = eventParsedResponse.name;
 
-    // event name
-    var eventName = userData.eventsAttending[event].name;
+        // event description
+        eventData.description = eventParsedResponse.description;
 
-    // event start date
-    var eventDate = userData.eventsAttending[event].start_time;
+        // event start time
+        eventData.startTime = eventParsedResponse.start_time;
 
-    // checks database for event
-    socket.emit("findEvent", eventID, function(err, data){
-      if (err != null) {
-        console.log(err);
-        console.log('dafuqqqq');
-        callback(err);
-      }
-      else {
-        console.log('data');
+        // list of attendees
+        eventData.attendees = JSON.parse(response[1].body);
+
+        // URL of event cover photo, hosted on FB server
+        eventData.coverPhoto = JSON.parse(response[2].body).cover.source;
+
+        // ID of event owner
+        eventData.hostID = JSON.parse(response[3].body);
+        
+        // sends data to app.js to fill event template
+        socket.emit('sendEventData', eventData);
+
+        // sends data to database
+        socket.emit("makeEvent", eventData);
+
+        // opens eventUI page
+        window.open('/event/'+eventData.eventID,'_self');
       }
     });
 
-    // console.log(123);
-    // socket.on('findEventSuccess', function(eventIsBlueshark) {
-    //   console.log(12322);
-    //   if (eventIsBlueshark) {
-    //     var eventHost = 'Host';
-    //   }
-    //   else {
-    //     var eventHost = 'Attending';
-    //   }
-    // });
-    // console.log(eventHost);
-  }
-};
+});

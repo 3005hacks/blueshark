@@ -26,19 +26,17 @@ module.exports = {
   // find event object from database
   findEventByID: function(db, className, objectKey, callback) {
 
-    // JOSH
-    var cursor = db.collection(className).find({'eventID': objectKey});
-    cursor.each(function(err, doc) {
-      // JOSH
+    db.collection(className).findOne({'eventID': objectKey}, function(err, result) {
       assert.equal(err, null);
 
       // if eventID IS found
-      if (doc != null) {
-        callback(null, doc);
+      if (result != null) {
+        callback(result);
       } 
       else {
-        callback("Nothing was found for this ID: " + objectKey);
+        console.log("Nothing was found for this ID: " + objectKey);
       }
     });
   }
+
 };
