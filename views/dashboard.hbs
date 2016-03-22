@@ -17,8 +17,8 @@
   </div>
 
   <div class="clearfix border-bottom">
-    <!-- Each event link goes in this link -->
 
+    {{!-- Need to add `each` loop to display all events --}}
     <a href="" class="link-nostyle text-decoration-none">
       <div class="col col-5">
         <p class="bold align-middle">{{ eventName }}</p>
@@ -29,9 +29,8 @@
     </div>
     <div class="col col-3">
       <p class="align-middle uppercase bold green">
-        {{ eventType }}
-        <i class="fa fa-cog grey pointer" onclick="javascript:openSettings()">
-        </i>
+        {{ eventHost }}
+        <i class="fa fa-cog grey pointer" onclick="javascript:openSettings()"></i>
       </p>
     </div>
 
@@ -41,6 +40,7 @@
   {{> "footer" }}
 </div>
 
+{{!-- Create event modal --}}
 <div class="make-event-form modal create-event white-bg p4 border rounded">
   <p class="h2">Add an event</p>
   <input type="text" class="input" name="link" placeholder="Enter Facebook event link" />
@@ -50,9 +50,11 @@
   <input type="button" id="make-event-submit" class="btn green-bg green-hover white" value="Submit" />
 </div>
 
+{{!-- Settings modal --}}
 <div class="modal settings white-bg p4 border rounded">
   <p class="h2">Event Settings</p>
   <p><i class="fa fa-trash-o"></i> Delete event</p>
 </div>
 
+{{!-- Cover is used for exiting modal --}}
 <div class="cover"></div>

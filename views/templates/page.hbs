@@ -1,44 +1,9 @@
-{{!-- <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8" />
-  <title>\{{#block "title"}}Potluck\{{/block}}</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link href="https://npmcdn.com/basscss@8.0.0/css/basscss.min.css" rel="stylesheet">
-  <link href="https://npmcdn.com/basscss-btn@1.1.1/css/btn.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="/css/style.min.css">
-</head>
-<body>
-  <!-- Facebook login scripts -->
-  <div id="fb-root"></div>
-  <script>(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=478980925626054";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));</script>
-
-\{{{body}}}
-
-\{{#block "js"}}
-<script src="js/global.js"></script>
-<script type="text/javascript" src="/js/globalClient.js"></script>
-<script type="text/javascript" src="/js/fb.js"></script>
-<script type="text/javascript" src="/js/dashboard.js"></script>
-<script type="text/javascript" src="/js/event.js"></script>
-<script type="text/javascript" src="/js/modal.js"></script>
-\{{/block}}
-
-</body>
-</html> --}}
-
 {{#extend "page"}}
 
 {{#content "main" mode="append"}}
+
 \{{{body}}}
+
 {{/content}}
 
 {{/extend}}
