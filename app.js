@@ -59,11 +59,9 @@ var dashboardTemplateData = {};
 // routing for dashboard page
 app.get('/dash', function(req, res) {
 
-  // dummy data
-  data = {eventTitle: 'Yeezy Just Jumped Over Jumpman', eventDate: '5/30/3005', eventHost: 'Yeezy Reincarnated'};
-  
   // renders dashboard template and fills it with data
-  res.render('dashboard', data);
+  console.log(dashboardPopulation);
+  res.render('dashboard', dashboardPopulation);
 });
 
 // routing for event page
@@ -93,23 +91,43 @@ io.on('connection', function(socket) {
   });
 
   // listener for findEvent
-  socket.on('findEvent', function(objectKey, callback) {
-
+  socket.on('populateDashboard', function(eventsAttending) {
     MongoClient.connect(url, function(err, db) {
 
       assert.equal(null, err);
 
-      mongo.findEventByID(db, 'events', objectKey, function(err, data) {
+      for (var event in eventsAttending) {
 
-        if (err != null) {
-          console.log(err);
-          callback(err);
-        }
-        else {
-          callback(null, data);
-        }
-        db.close();
-      });
+        mongo.findEventByID(db, 'events', eventsAttending[event].id, function(result) {
+
+          // if (err != null) {
+          //   console.log(err);
+          //   callback(err);
+          // }
+          // else {
+          //   callback(null, data);
+          // }
+          // callback();
+        
+          // event ID
+          var eventID = result.eventID;
+
+          // event name
+          var eventName = result.name;
+
+          // event start date
+          var eventDate = result.startTime;
+
+          if (result.hostID == userData.userID) {
+            var eventType = 'Host';
+          }
+          else
+            var eventType = 'Attending';
+
+          dashboardPopulation.push({'eventID': eventID, 'eventName': eventName, 'eventDate':eventDate, 'eventType':eventType});
+
+        });
+      }
     });
   });
 
@@ -117,4 +135,5 @@ io.on('connection', function(socket) {
   socket.on('sendEventData', function(data) {
     eventData = data;
   });
+
 });
