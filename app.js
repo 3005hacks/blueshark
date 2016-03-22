@@ -30,8 +30,6 @@ var mongo = require('./server/db');
 var exphbs  = require('express-handlebars');
 var layouts = require('handlebars-layouts')
 
-exphbs.Handlebars.registerHelpers(layouts(exphbs));
-
 app.engine('.hbs', exphbs({
   defaultLayout: 'page',
   extname: '.hbs'
@@ -39,7 +37,7 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // lets you access css, js, and img files
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'dist')));
 
 // instantiates http server
 http.listen(3000, function() {
