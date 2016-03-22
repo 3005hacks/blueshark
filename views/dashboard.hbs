@@ -1,27 +1,7 @@
-<!-- FB button code -->
-<div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=510841125734589";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-<!-- End of FB button -->
+{{!-- {{#content "title" mode="append"}} - Dashboard{{/content}} --}}
 
 <div class="container">
-  <div class="clearfix white-bg">
-    <div class="col col-6">
-      <p class="h1 green uppercase bold">Potluck</p>
-    </div>
-    <div class="col col-6 lh-5">
-      <!-- This is the button to use for FB login if the official one doesn't work -->
-      <!-- <div id="fb-login-button" class="fb-blue uppercase pointer right lh-5"><p><i class="fa fa-facebook-official fa-lg"></i> Log In</p></div> -->
-      <div class="fb-login-button right" data-max-rows="1" data-size="large" data-show-faces="false" data-auto-logout-link="true" data-scope="user_events"></div>
-    </div>
-  </div>
+  {{> "header" }}
 
   <div class="clearfix">
     <div class="col col-4">
@@ -37,8 +17,8 @@
   </div>
 
   <div class="clearfix border-bottom">
-    <!-- Each event link goes in this link -->
 
+    {{!-- Need to add `each` loop to display all events --}}
     <a href="" class="link-nostyle text-decoration-none">
       <div class="col col-5">
         <p class="bold align-middle">{{ eventName }}</p>
@@ -49,22 +29,18 @@
     </div>
     <div class="col col-3">
       <p class="align-middle uppercase bold green">
-        {{ eventType }}
-        <i class="fa fa-cog grey pointer" onclick="javascript:openSettings()">
-        </i>
+        {{ eventHost }}
+        <i class="fa fa-cog grey pointer" onclick="javascript:openSettings()"></i>
       </p>
     </div>
 
   </div>
 
 
-  <div class="clearfix">
-    <div class="col col-12">
-      <p>A <a href="http://3005hacks.com">3005hacks</a> project.</p>
-    </div>
-  </div>
+  {{> "footer" }}
 </div>
 
+{{!-- Create event modal --}}
 <div class="make-event-form modal create-event white-bg p4 border rounded">
   <p class="h2">Add an event</p>
   <input type="text" class="input" name="link" placeholder="Enter Facebook event link" />
@@ -74,9 +50,11 @@
   <input type="button" id="make-event-submit" class="btn green-bg green-hover white" value="Submit" />
 </div>
 
+{{!-- Settings modal --}}
 <div class="modal settings white-bg p4 border rounded">
   <p class="h2">Event Settings</p>
   <p><i class="fa fa-trash-o"></i> Delete event</p>
 </div>
 
+{{!-- Cover is used for exiting modal --}}
 <div class="cover"></div>
