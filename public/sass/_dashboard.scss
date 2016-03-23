@@ -1,0 +1,44 @@
+.modal {
+  background: $white;
+  box-sizing: border-box;
+  left: 30%;
+  opacity: 0;
+  position: absolute;
+  top: 10%;
+  visibility: hidden;
+  width: 40%;
+}
+
+.dialog-is-open .container {
+  filter: blur(5px) grayscale(50%);
+}
+
+.create-event-is-open .create-event {
+  opacity: 1;
+  transform: scale(1); // prefix me
+  visibility: visible;
+  z-index: 2;
+}
+
+.settings-is-open .settings {
+  opacity: 1;
+  transform: scale(1); // prefix me
+  visibility: visible;
+  z-index: 2;
+}
+
+.cover {
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  visibility: hidden;
+  width: 100%;
+  z-index: 1;
+}
+
+.dialog-is-open .cover {
+  opacity: 1;
+  visibility: visible;
+}

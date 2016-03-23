@@ -5,6 +5,32 @@ description: client-side code for Facebook events and users access
 
 */
 
+function onLogin(response) {
+  console.log('connected');
+  $('.landing').show();
+
+  userData.loginStatus = true;
+  userData.userID = response.authResponse.userID;
+  userData.userAccessToken = response.authResponse.accessToken;
+
+  FB.api('/', 'POST', {
+      // using batch POST request so if we want to pull more data later we can
+      batch: [
+        { method: "GET", relative_url: userData.userID},
+        { method: "GET", relative_url: userData.userID + '/events'},
+      ]
+    },
+    function (response) {
+      if (response && !response.error) {
+        userData.name = JSON.parse(response[0].body).name;
+        userData.proPicURL = "https://graph.facebook.com/" + userData.userID + "/picture";
+        userData.eventsAttending = JSON.parse(response[1].body).data;
+      }
+
+      socket.emit("populateDashboard", userData.eventsAttending);
+    });
+}
+
 // instantiates facebook API
 window.fbAsyncInit = function() {
 	FB.init({
@@ -13,35 +39,19 @@ window.fbAsyncInit = function() {
 	  version    : 'v2.5'
 	});
 
+  // checks login status without having to wait for user to log in or out
+  FB.getLoginStatus( function(response) {
+    if (response.status === 'connected') {
+      onLogin(response);
+    }
+  });
+
 	// triggered on fbLogin and fbLogout
-	FB.Event.subscribe('auth.authResponseChange', function(response) {
-		if (response.status === 'connected') {
-	  	console.log('connected');
-	  	$('.landing').show();
-
-	  	userData.loginStatus = true;
-	  	userData.userID = response.authResponse.userID;
-      userData.userAccessToken = response.authResponse.accessToken;
-
-      FB.api('/', 'POST', {
-	    		// using batch POST request so if we want to pull more data later we can
-	        batch: [
-	          { method: "GET", relative_url: userData.userID},
-	          { method: "GET", relative_url: userData.userID + '/events'},
-	        ]
-	      },
-        function (response) {
-          if (response && !response.error) {
-            userData.name = JSON.parse(response[0].body).name;
-            userData.proPicURL = "https://graph.facebook.com/" + userData.userID + "/picture";
-            userData.eventsAttending = JSON.parse(response[1].body).data;
-          }
-
-          // transfers data to app.js for dashboard to access
-          populateDashboard();
-        });
-			}
-	});
+	// FB.Event.subscribe('auth.authResponseChange', function(response) {
+	// 	if (response.status === 'connected') {
+ //        onLogin(response);
+	// 		}
+	// });
 
 };
 
