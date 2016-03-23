@@ -59,7 +59,7 @@ app.get('/dash', function(req, res) {
 
   // renders dashboard template and fills it with data
   console.log(dashboardPopulation);
-  res.render('dashboard', dashboardPopulation);
+  res.render('dashboard', dashData);
 });
 
 // routing for event page
@@ -70,6 +70,8 @@ app.get('/event/:eventID', function(req, res) {
 });
 
 /************** socket.io **************/
+
+var dashData = {};
 
 // starts socket connection
 io.on('connection', function(socket) {
@@ -126,8 +128,11 @@ io.on('connection', function(socket) {
 
         });
       }
+      dashData = {'events' : dashboardPopulation }
     });
   });
+
+
 
   // listener for sendEventData
   socket.on('sendEventData', function(data) {
