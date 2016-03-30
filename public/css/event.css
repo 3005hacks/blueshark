@@ -1,6 +1,8 @@
 body, html{
-	background-color: #D62839;
+	background-color: #FAFAFA;
 	font-family: 'Muli', sans-serif;
+	font-weight: 200;
+	color: #9370db;
 	height: 100%;
 	width: 100%;
 	margin: 0 0 0 0;
@@ -9,215 +11,106 @@ body, html{
 	z-index: 0;
 }
 .header{
-	height: 25vh;
+	width: 100%;
 	color: white;
-	overflow: hidden;
+	font-weight: 200;
+	height: 20vh;
+	padding-top: 5vh;
+	padding-bottom: 6vh;
+	margin-bottom: 6vh;
+	background-image: url("img/kanye.jpg");
 }
-	.header-left{
-		float: left;
-		width: 27%;
-		overflow: hidden;
+	.event-title{
+		font-size: 8rem;
+		margin: 0% 0% 0 0%;
+		text-align: center;
 	}
-		.header-left img{
-			width: 100%;
-			height: auto;
-		}
-	.header-right{
-		float: left;
-		width: 73%;
+	.info-bar{
+
 	}
-		.event-title{
-			font-size: 10rem;
+		.datetime{
+			font-size: 3rem;
 			text-align: center;
-			color: white;
-			margin: 3rem 0 auto 0;
-			z-index: 1;
 		}
+		.suggested-pay{
+			font-size: 1.5rem;
+			text-align: center;
+			margin-top: 1%;
+		}
+
 .content{
 	height: 75vh;
-
+	overflow: scroll;
 }
-	.sidebar{
-		width: 23%;
-		height: 100%;
-		float: left;
+	.insta-pay{
+		text-align: center;
+		height: 5rem;
+		width: 16vw;
+		margin: 0 42vw 5vh 42vw;
+		border: solid 0.2rem;
+		font-size: 3rem;
+		line-height: 5rem;
+		overflow: hidden;
+	}
+	.insta-pay:hover{
 		color: white;
-		padding-left: 3%;
-		padding-right: 1%;
-		background-color: #0E84A1;
+		background-color: #9370db;
+		cursor: pointer;
 	}
-		.event-time{
-			padding-top: 10%;
-		}
-		.event-date{
-
-		}
-		.datetime{
-			font-size: 2rem;
-			margin: 0rem 0rem 2rem 0rem;
-		}
-		.event-descript{
-			font-style: italic;
-			font-size: 1.8rem;
-		}
-	.feed{
-		width: 73%;
-		height: 100%;
-		float: left;
-		background-color: white;
-		overflow: scroll;
+	.wishlist-hub{
+		width: 50%;
+		margin-left: 25%;
+		margin-right: auto;
 	}
-		.feed-header{
-			text-align: center;
-			padding-top: 2%;
+		.wishlist-header{
+			padding-bottom: 1.2%;
+			display: flex;
 		}
-			.button1{
-				height: 5rem;
-				width: 25%;
-				border: 2px solid;
-				border-color: #D62839;
-				margin: 2%;
-				display: inline-block;
-				color: #D62839;
-				font-size: 2rem;
-				line-height: 5rem;
-				cursor: pointer;
-				overflow: hidden;
+			.wishlist-label{
+				width: 85%;
+				font-size: 4rem;
+				font-weight: 200;
 			}
-			.button1:hover{
-				background-color: #D62839;
+			#wishlist-add-button{
+				width: 15%;
+				text-align: right;
+				font-size: 1.5rem;	
+				line-height: 2.5rem;
+				background-color: #9370db;
 				color: white;
-			}
-			.chip-in{
-
-			}
-			.bring{
-
-			}
-			.peep-list-hub{
-				margin: 2%;
-			}
-			.peep-list-dropdown{
+				text-align: center;
 				display: none;
 			}
-			.peep-list{
-				text-align: center;
-				height: 4rem;
-				width: 25%;
-				border: 2px solid;
-				border-color: #D62839;
-				background-color: #D62839;
-				display: block;
-				color: white;
-				font-size: 1.6rem;
-				line-height: 4rem;
-				cursor: pointer;
-				overflow: hidden;				
+		.wishlist-feed{
+			overflow: hidden;
+			border-top: solid 0.2rem;
+			padding-top: 2%;
+		}
+			.wishlist-item{
+				width: 100%;
+				display: flex;
+				justify-content: center;
+				border-bottom: solid 0.1rem;
+				padding-bottom: 2%;
+				margin-bottom: 2%;
 			}
-			.peep-list:hover{
-				border-color: white;
-			}
-				.list-item{
-					height: 4rem;
-					border: 2px solid;
-					border-color: #D62839;
-					background-color: white;
-					width: 25%;					
-				}
-					.list-item-title{
-						color: #D62839;
-						font-size: 1.6rem;
-						line-height: 4rem;
-						width: 80%;
-						float: left;
-						margin-left: 2%;
-						text-align: left;
-					}
-					.list-item-cost{
-						color: #D62839;
-						font-size: 1.6rem;
-						line-height: 4rem;
-						float: left;
-					}
-				.select-list-item{
-						color: #D62839;
-						font-size: 1.6rem;
-						line-height: 4rem;
-				}
-				.add-item{
-					height: 4rem;
-					background-color: #D62839;
-					color: white;
-					font-size: 1.6rem;
-					line-height: 4rem;
-					cursor: pointer;
-					z-index: 0;
-				}
-				.add-item:hover{
-					border-color: white;
-				}
-				.new-item-name{
-					width: 100%;
-					padding: 0;
-					display: none;
-				}
-				.new-item-price{
-					display: none;
-				}
-			.item-card{
-				margin: 4% 0 4% 0;
-				padding: 1%;
-				width: 45%;
-				border: 2px solid;
-				border-color: #D62839;
-				height: 14rem;
-				overflow: hidden;
-			}
-				.item-title{
-					font-size: 2rem;
-					max-height: 3rem;
-					text-align: left;
-					color: #D62839;
-					float: left;
-					width: 88%;
-				}
-				.item-icon{
-					height: 3rem;
-					width: 3rem;
-					border: #D62839 solid 2px;
-					border-radius: 50%;
-				}
-					.item-icon img{
-						height: 2.5rem;
-						width: auto;
-						padding: 0.1rem; 
-\\
-					}
-				.icon-shell{
-					width: 8%;
-					float: left;
-				}
-				.loading-bar{
+				.item-name{
 					width: 70%;
-					border: #D62839 solid 2px;
-					height: 3rem;
-					display: block;
-					clear: left;
-					margin: 2rem;
+					font-size: 2.5rem;
 				}
-				.button-shell{
-					padding-top: 5%;
-				}
-				.button2{
-					height: 5rem;
-					width: 5rem;
-					border: solid;
-					border-radius: 50%;
-					background-color: #D62839;
+				.item-button{
+					width: 15%;
+					font-size: 1.5rem;	
+					line-height: 2.5rem;
+					background-color: #9370db;
+					border-radius: 0;
 					color: white;
-					float: left;
-					display: none;
+					text-align: center;
+					margin: 0 2% 0 2%;
 				}
-.footer{
+				.pay-item{
+				
+				}
+				.bring-item{
 
-}
+				}
