@@ -14,19 +14,18 @@ module.exports = {
   // insert an object into the database
   insertDocument: function(db, className, mongoData, callback) {
 
-    // JOSH
     db.collection(className).insertOne(mongoData, function(err, result) {
-      // JOSH
+
       assert.equal(err, null);
-      console.log("Inserted a document into the events collection.");
+      console.log("Inserted a document into the " + className + " collection.");
       callback();
     });
   },
 
   // find event object from database
-  findEventByID: function(db, className, objectKey, callback) {
+  findDocument: function(db, className, attributeName, objectKey, callback) {
 
-    db.collection(className).findOne({'eventID': objectKey}, function(err, result) {
+    db.collection(className).findOne({attributeName: objectKey}, function(err, result) {
       assert.equal(err, null);
 
       // if eventID IS found
@@ -34,7 +33,7 @@ module.exports = {
         callback(result);
       } 
       else {
-        console.log("Nothing was found for this ID: " + objectKey);
+        console.log("Nothing was found for: " + objectKey);
       }
     });
   }

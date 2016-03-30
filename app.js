@@ -96,7 +96,7 @@ io.on('connection', function(socket) {
 
       for (var event in eventsAttending) {
 
-        mongo.findEventByID(db, 'events', eventsAttending[event].id, function(result) {
+        mongo.findDocument(db, 'events', 'eventID', eventsAttending[event].id, function(result) {
 
           // if (err != null) {
           //   console.log(err);
@@ -106,7 +106,7 @@ io.on('connection', function(socket) {
           //   callback(null, data);
           // }
           // callback();
-        
+
           // event ID
           var eventID = result.eventID;
 
