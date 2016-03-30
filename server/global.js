@@ -28,6 +28,3 @@ eventData = {
   squareCashInfo: null,
   hostID: null,
 };
-
-// array populated on user login
-dashboardPopulation = [];

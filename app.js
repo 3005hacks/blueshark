@@ -37,7 +37,7 @@ app.engine('.hbs', exphbs({
 app.set('view engine', '.hbs');
 
 // lets you access css, js, and img files
-app.use(express.static(path.join(__dirname, 'dist')));
+app.use(express.static(path.join(__dirname + '/dist')));
 
 // instantiates http server
 http.listen(3005, function() {
@@ -48,28 +48,26 @@ http.listen(3005, function() {
 
 // routing for landing page
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/views/landing.html');
+  res.render('landing');
 });
-
-// holder variable for template data for dashboard.handlebars
-var dashboardTemplateData = {};
 
 // routing for dashboard page
 app.get('/dash', function(req, res) {
 
   // renders dashboard template and fills it with data
-  console.log(dashboardPopulation);
-  res.render('dashboard', dashboardPopulation);
+  console.log(dashboardEvents);
+  res.render('dashboard', dashboardEvents);
 });
 
 // routing for event page
 app.get('/event/:eventID', function(req, res) {
-  // console.log(eventData);
   // renders event template and fills it with data
   res.render('event', eventData);
 });
 
 /************** socket.io **************/
+
+var dashboardEvents = {};
 
 // starts socket connection
 io.on('connection', function(socket) {
@@ -89,12 +87,12 @@ io.on('connection', function(socket) {
   });
 
   // listener for findEvent
-  socket.on('populateDashboard', function(eventsAttending) {
+  socket.on('populateDashboard', function(dashData) {
     MongoClient.connect(url, function(err, db) {
 
       assert.equal(null, err);
 
-      for (var event in eventsAttending) {
+      for (var event in dashData.attending) {
 
         mongo.findDocument(db, 'events', 'eventID', eventsAttending[event].id, function(result) {
 
@@ -116,18 +114,26 @@ io.on('connection', function(socket) {
           // event start date
           var eventDate = result.startTime;
 
-          if (result.hostID == userData.userID) {
-            var eventType = 'Host';
-          }
+          var eventType;
+          if (result.hostID == userData.userID)
+            eventType = 'Host';
           else
-            var eventType = 'Attending';
+            eventType = 'Attending';
 
-          dashboardPopulation.push({'eventID': eventID, 'eventName': eventName, 'eventDate':eventDate, 'eventType':eventType});
-
+          dashData.found.events.push({
+            'eventID': eventID,
+            'eventName': eventName,
+            'eventDate': eventDate,
+            'eventType': eventType
+          });
+          console.log(dashData.found);
+          dashboardEvents = dashData.found;
         });
       }
     });
   });
+
+
 
   // listener for sendEventData
   socket.on('sendEventData', function(data) {
