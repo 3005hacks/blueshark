@@ -40,8 +40,8 @@ app.set('view engine', '.hbs');
 app.use(express.static(path.join(__dirname, 'dist')));
 
 // instantiates http server
-http.listen(3000, function() {
-  console.log('listening on *:3000');
+http.listen(3005, function() {
+  console.log('listening on *:3005');
 });
 
 /************** ROUTING **************/
