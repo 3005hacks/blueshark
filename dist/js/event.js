@@ -1,1 +1,0 @@
-$('.header').css("background-image", "url(eventData.coverPhoto)"); 
