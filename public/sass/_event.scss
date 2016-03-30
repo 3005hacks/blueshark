@@ -1,0 +1,118 @@
+.event {
+body, html{
+  background-color: #FAFAFA;
+  font-family: 'Muli', sans-serif;
+  font-weight: 200;
+  color: #9370db;
+  height: 100%;
+  width: 100%;
+  margin: 0 0 0 0;
+  font-size: 10px;
+  position: relative;
+  z-index: 0;
+}
+.header{
+  width: 100%;
+  color: white;
+  font-weight: 200;
+  height: 20vh;
+  padding-top: 5vh;
+  padding-bottom: 6vh;
+  margin-bottom: 6vh;
+  background-image: url("img/kanye.jpg");
+}
+  .event-title{
+    font-size: 8rem;
+    margin: 0% 0% 0 0%;
+    text-align: center;
+  }
+  .info-bar{
+
+  }
+    .datetime{
+      font-size: 3rem;
+      text-align: center;
+    }
+    .suggested-pay{
+      font-size: 1.5rem;
+      text-align: center;
+      margin-top: 1%;
+    }
+
+.content{
+  height: 75vh;
+  overflow: scroll;
+}
+  .insta-pay{
+    text-align: center;
+    height: 5rem;
+    width: 16vw;
+    margin: 0 42vw 5vh 42vw;
+    border: solid 0.2rem;
+    font-size: 3rem;
+    line-height: 5rem;
+    overflow: hidden;
+  }
+  .insta-pay:hover{
+    color: white;
+    background-color: #9370db;
+    cursor: pointer;
+  }
+  .wishlist-hub{
+    width: 50%;
+    margin-left: 25%;
+    margin-right: auto;
+  }
+    .wishlist-header{
+      padding-bottom: 1.2%;
+      display: flex;
+    }
+      .wishlist-label{
+        width: 85%;
+        font-size: 4rem;
+        font-weight: 200;
+      }
+      #wishlist-add-button{
+        width: 15%;
+        text-align: right;
+        font-size: 1.5rem;  
+        line-height: 2.5rem;
+        background-color: #9370db;
+        color: white;
+        text-align: center;
+        display: none;
+      }
+    .wishlist-feed{
+      overflow: hidden;
+      border-top: solid 0.2rem;
+      padding-top: 2%;
+    }
+      .wishlist-item{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        border-bottom: solid 0.1rem;
+        padding-bottom: 2%;
+        margin-bottom: 2%;
+      }
+        .item-name{
+          width: 70%;
+          font-size: 2.5rem;
+        }
+        .item-button{
+          width: 15%;
+          font-size: 1.5rem;  
+          line-height: 2.5rem;
+          background-color: #9370db;
+          border-radius: 0;
+          color: white;
+          text-align: center;
+          margin: 0 2% 0 2%;
+        }
+        .pay-item{
+        
+        }
+        .bring-item{
+
+        }
+}

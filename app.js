@@ -115,6 +115,8 @@ io.on('connection', function(socket) {
           // event start date
           var eventDate = result.startTime;
 
+          console.log(result.hostID.owner.id);
+          console.log(userData);
           var eventType;
           if (result.hostID == userData.userID)
             eventType = 'Host';
