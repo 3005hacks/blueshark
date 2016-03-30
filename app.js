@@ -48,7 +48,7 @@ http.listen(3000, function() {
 
 // routing for landing page
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/views/landing.html');
+  res.render('landing');
 });
 
 // routing for dashboard page
