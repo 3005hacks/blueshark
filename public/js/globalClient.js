@@ -5,3 +5,8 @@ socket.on('global', function(data) {
 	userData = data.userData;
 	eventData = data.eventData;
 })
+
+
+var dashData = {
+  'events' : []
+};
