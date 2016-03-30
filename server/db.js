@@ -11,22 +11,35 @@ var assert = require('assert');
 // these functions are used in app.js
 module.exports = {
 
-  // insert an object into the database
+  /**
+  * This function inserts a new document into a given collection in the database
+  * @param {mongo} db - the database provided in app.js
+  * @param {String} className - the desired collection into which to be inserted
+  * @param {Object} mongoData - the data to be stored
+  * @param (function) callback - function to be executed after the current call
+  */
   insertDocument: function(db, className, mongoData, callback) {
 
-    // JOSH
+    // Navigate to the desired collection and insert the data
     db.collection(className).insertOne(mongoData, function(err, result) {
-      // JOSH
+
+      // Check of there are any errors, if not, run the callback
       assert.equal(err, null);
-      console.log("Inserted a document into the events collection.");
+      console.log("Inserted a document into the " + className + " collection.");
       callback();
     });
   },
 
-  // find event object from database
-  findEventByID: function(db, className, objectKey, callback) {
+  /**
+  * This function retrieves an element from the database
+  * @param {mongo} db - the database provided in app.js
+  * @param {String} className - the desired collection from which to pull the data
+  * @param {String} objectKey - the Facebook event ID for which to query
+  * @param (function) callback - function to be executed after the current call
+  */
+  findEventByID: function(db, className, attributeName, objectKey, callback) {
 
-    db.collection(className).findOne({'eventID': objectKey}, function(err, result) {
+    db.collection(className).findOne({attributeName: objectKey}, function(err, result) {
       assert.equal(err, null);
 
       // if eventID IS found
@@ -34,7 +47,7 @@ module.exports = {
         callback(result);
       } 
       else {
-        console.log("Nothing was found for this ID: " + objectKey);
+        console.log("Nothing was found for: " + objectKey);
       }
     });
   }
