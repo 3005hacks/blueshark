@@ -30,6 +30,9 @@ var mongo = require('./server/db');
 var exphbs  = require('express-handlebars');
 var layouts = require('handlebars-layouts')
 
+var userData;
+var eventData;
+
 app.engine('.hbs', exphbs({
   defaultLayout: 'page',
   extname: '.hbs'
@@ -48,6 +51,7 @@ http.listen(3005, function() {
 
 // routing for landing page
 app.get('/', function(req, res) {
+  console.log(userData);
   res.render('landing');
 });
 
@@ -55,7 +59,6 @@ app.get('/', function(req, res) {
 app.get('/dash', function(req, res) {
 
   // renders dashboard template and fills it with data
-  console.log(dashboardEvents);
   res.render('dashboard', dashboardEvents);
 });
 
@@ -73,9 +76,13 @@ var dashboardEvents = {};
 io.on('connection', function(socket) {
 
   console.log('socket.io connected');
-
-  socket.emit('global', {userData, eventData});
   
+  socket.on('global', function(data) {
+    userData = data.userData;
+    eventData = data.eventData;
+    console.log('global recieved');
+  });
+
   // listener for makeEvent
   socket.on('makeEvent', function(mongoData) {
     MongoClient.connect(url, function(err, db) {
@@ -92,9 +99,8 @@ io.on('connection', function(socket) {
 
       assert.equal(null, err);
 
-      for (var event in dashData.attending) {
-
-        mongo.findDocument(db, 'events', 'eventID', eventsAttending[event].id, function(result) {
+      for (var event in userData.eventsAttending) {
+        mongo.findDocument(db, 'events', 'eventID', userData.eventsAttending[event].id, function(result) {
 
           // if (err != null) {
           //   console.log(err);
