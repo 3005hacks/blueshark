@@ -37,9 +37,12 @@ module.exports = {
   * @param {String} objectKey - the Facebook event ID for which to query
   * @param (function) callback - function to be executed after the current call
   */
-  findEventByID: function(db, className, attributeName, objectKey, callback) {
+  findDocument: function(db, className, attributeName, objectKey, callback) {
 
-    db.collection(className).findOne({attributeName: objectKey}, function(err, result) {
+    var query = {};
+    query[attributeName] = objectKey;
+
+    db.collection(className).findOne(query, function(err, result) {
       assert.equal(err, null);
 
       // if eventID IS found

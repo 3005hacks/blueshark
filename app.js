@@ -32,6 +32,7 @@ var layouts = require('handlebars-layouts')
 
 var userData;
 var eventData;
+var dashboardEvents;
 
 app.engine('.hbs', exphbs({
   defaultLayout: 'page',
@@ -51,13 +52,11 @@ http.listen(3005, function() {
 
 // routing for landing page
 app.get('/', function(req, res) {
-  console.log(userData);
   res.render('landing');
 });
 
 // routing for dashboard page
 app.get('/dash', function(req, res) {
-
   // renders dashboard template and fills it with data
   res.render('dashboard', dashboardEvents);
 });
@@ -70,8 +69,6 @@ app.get('/event/:eventID', function(req, res) {
 
 /************** socket.io **************/
 
-var dashboardEvents = {};
-
 // starts socket connection
 io.on('connection', function(socket) {
 
@@ -80,6 +77,7 @@ io.on('connection', function(socket) {
   socket.on('global', function(data) {
     userData = data.userData;
     eventData = data.eventData;
+    dashboardEvents = data.dashData;
     console.log('global recieved');
   });
 
@@ -95,13 +93,13 @@ io.on('connection', function(socket) {
 
   // listener for findEvent
   socket.on('populateDashboard', function(dashData) {
+    console.log(1);
     MongoClient.connect(url, function(err, db) {
 
       assert.equal(null, err);
 
       for (var event in userData.eventsAttending) {
         mongo.findDocument(db, 'events', 'eventID', userData.eventsAttending[event].id, function(result) {
-
           // if (err != null) {
           //   console.log(err);
           //   callback(err);
@@ -120,8 +118,6 @@ io.on('connection', function(socket) {
           // event start date
           var eventDate = result.startTime;
 
-          console.log(result.hostID.owner.id);
-          console.log(userData);
           var eventType;
           if (result.hostID == userData.userID)
             eventType = 'Host';
@@ -134,10 +130,9 @@ io.on('connection', function(socket) {
             'eventDate': eventDate,
             'eventType': eventType
           });
-          console.log(dashData.found);
-          dashboardEvents = dashData.found;
         });
       }
+      dashboardEvents = dashData.found;
     });
   });
 

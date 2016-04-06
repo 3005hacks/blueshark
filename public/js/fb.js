@@ -34,6 +34,7 @@ function onLogin(response) {
         }
       }
 
+      socket.emit('global', {userData, eventData});
       socket.emit("populateDashboard", dashData);
     });
 }

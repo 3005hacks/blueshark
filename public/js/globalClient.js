@@ -1,5 +1,7 @@
+$("#dashboard").load();
+
 // // object populated on user login
-userData = {
+var userData = {
   name: null,
   userID: null,
   userAccessToken: null,
@@ -9,7 +11,7 @@ userData = {
 };
 
 // // object populated when event is created or selected
-eventData = {
+var eventData = {
   eventID: null,
   name: null,
   coverPhoto: null,
@@ -22,14 +24,9 @@ eventData = {
   hostID: null,
 };
 
-var dashData = {
-  'events' : []
-};
-
 // SOCKET.IO
 
 // instantiates socket
 var socket = io();
 
-console.log('global emitting');
 socket.emit('global', {userData, eventData});
