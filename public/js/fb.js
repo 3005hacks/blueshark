@@ -27,7 +27,14 @@ function onLogin(response) {
         userData.eventsAttending = JSON.parse(response[1].body).data;
       }
 
-      socket.emit("populateDashboard", userData.eventsAttending);
+      var dashData = {
+        attending: userData.eventsAttending,
+        found: {
+          events: []
+        }
+      }
+
+      socket.emit("populateDashboard", dashData);
     });
 }
 
